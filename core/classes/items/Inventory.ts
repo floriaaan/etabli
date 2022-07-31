@@ -9,14 +9,26 @@ export class Inventory {
 
   constructor() {}
 
-  public isEmpty(): boolean {
+  public isSlotEmpty(): boolean {
     return this.slots[this.selectedSlot] === null;
   }
-  public isFull(): boolean {
+  public isSlotFull(): boolean {
     return (
       this.slots[this.selectedSlot].amount ===
       this.slots[this.selectedSlot].maxAmount
     );
+  }
+
+  public isEmpty(): boolean {
+    return this.slots.every((slot) => slot === null);
+  }
+
+  public isFull(): boolean {
+    return this.slots.every((slot) => slot !== null);
+  }
+
+  public isNotEmpty(): boolean {
+    return this.slots.some((slot) => slot !== null);
   }
 
   public add(item: Item | Block, amount: number) {}
