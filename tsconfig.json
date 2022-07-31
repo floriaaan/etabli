@@ -1,13 +1,16 @@
 {
   "compilerOptions": {
     "module": "commonjs",
-    "target": "ES2022",
+    "target": "ESNext",
     "lib": ["es2015"],
     "moduleResolution": "node",
     "sourceMap": true,
     "outDir": "dist",
     "baseUrl": ".",
-    
+    "paths": {
+      "@etabli/classes/*": ["core/classes/*"],
+      "@etabli/core/*": ["core/*"]
+    },
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "esModuleInterop": true

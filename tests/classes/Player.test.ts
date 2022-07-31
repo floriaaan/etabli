@@ -1,11 +1,11 @@
-import { Player } from "core/classes/Player";
+import { Player } from "@etabli/classes/entities/Player";
 
 describe("Test person.ts", () => {
   let player: Player;
-
   beforeEach(() => (player = new Player("Steve")));
 
-  test("should have Steve as a name", () => {
+
+  it("should have Steve as a name", () => {
     expect(player.name).toBe("Steve");
   });
 });
