@@ -1,7 +1,7 @@
 export const saves = {
   autosave: {
     enabled: true,
-    interval: "1s",
+    interval: "30min",
   },
   path: "saves",
   world: "world",

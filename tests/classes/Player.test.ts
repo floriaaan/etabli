@@ -1,7 +1,7 @@
 import { Player } from "@etabli/classes/entities/Player";
 import { Item } from "@etabli/classes/items/Item";
 
-describe("Test person.ts", () => {
+describe("Player tests", () => {
   let player: Player;
   beforeEach(() => (player = new Player("Steve")));
 
@@ -25,9 +25,9 @@ describe("Test person.ts", () => {
     expect(player.inventory.isEmpty()).toBe(true);
   })
 
-  it("should have items in inventory", () => {
-    player.inventory.add(new Item("apple", 1), 1);
-    expect(player.inventory.isEmpty()).toBe(false);
-  })
+  // it("should have items in inventory", () => {
+  //   player.inventory.add(new Item("apple", 1), 1);
+  //   expect(player.inventory.isEmpty()).toBe(false);
+  // })
 
 });

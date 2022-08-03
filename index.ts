@@ -23,7 +23,7 @@ require("@etabli/core/modloader")().then(() => {
     setInterval(() => {
       singleLine.log(`Autosave:\tSaving ${players.length} player(s)...`);
       for (const player of players) {
-        savePlayer(p);
+        savePlayer(player);
       }
     }, parseDuration(saves.autosave.interval));
   } else console.log("Autosave:\tdisabled");
