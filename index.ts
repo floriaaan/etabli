@@ -1,4 +1,5 @@
 require("module-alias/register");
+const chalk = require("chalk");
 
 import { Player } from "@etabli/classes/entities/Player";
 import { savePlayer } from "@etabli/core/saver";
@@ -14,17 +15,19 @@ require("@etabli/core/modloader")().then(() => {
 
   // check mod loading
   // @ts-ignore
-  if (players[0].exampleMod) console.log(players[0].exampleMod());
+  if (players[0].exampleMod) console.log("\t" + players[0].exampleMod());
 
   // check entity saving
   // @ts-ignore
   if (saves.autosave.enabled) {
-    console.log("Autosave:\tenabled");
+    console.log(chalk.green.bold("Autosave") + ":\tenabled");
     setInterval(() => {
-      singleLine.log(`Autosave:\tSaving ${players.length} player(s)...`);
+      singleLine.log(
+        `\tSaving \t${chalk.blue(`${players.length} player(s)`)}...`
+      );
       for (const player of players) {
         savePlayer(player);
       }
     }, parseDuration(saves.autosave.interval));
-  } else console.log("Autosave:\tdisabled");
+  } else console.log(chalk.red.bold("Autosave") + ":\tdisabled");
 });
