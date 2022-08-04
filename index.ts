@@ -8,34 +8,59 @@ import { Server } from "socket.io";
 import { Player } from "@etabli/classes/entities/Player";
 import { savePlayer } from "@etabli/core/saver";
 import { saves, server } from "@etabli/config";
+import { log } from "./utils/console/log";
+
+const clog = console.log;
 
 require("@etabli/core/modloader")().then(() => {
-  let players = [];
+  let players: Player[] = [];
 
   // websocket server
   if (server.enabled) {
-    console.log(chalk.green.underline.bold("Server") + ":\t\tenabled");
+    clog(chalk.green.underline.bold("Server") + ":\t\tenabled");
 
     const io = new Server(httpServer);
     io.listen(server.port);
-    console.log("\tListening on port: " + server.port);
+    clog("\tListening on port: " + server.port);
     io.on("connection", (client) => {
       client.on("name_entered", (data) => {
+        if (server.console.log.connections) {
+          log(`${data.name} joined the game`, {
+            textColor: "yellowBright",
+            date: true,
+          });
+        }
         const player = new Player(data.name);
         player.socketId = client.id;
         players.push(player);
       });
 
+      client.on("chat_message", (message) => {
+        const playerName = players.find((p) => p.socketId === client.id)?.name;
+        log(`${playerName}: ${message}`, { date: true });
+        io.sockets.emit("chat_message", { playerName, message });
+      });
+
       client.on("disconnect", () => {
+        if (server.console.log.connections) {
+          const playerName = players.find(
+            (p) => p.socketId === client.id
+          )?.name;
+
+          log(`${playerName} left the game`, {
+            textColor: "yellowBright",
+            date: true,
+          });
+        }
         players = players.filter((player) => player.socketId !== client.id);
       });
     });
-  } else console.log(chalk.red.underline.bold("Server") + ":\t\tdisabled");
+  } else clog(chalk.red.underline.bold("Server") + ":\t\tdisabled");
 
   // check entity saving
   // @ts-ignore
   if (saves.autosave.enabled) {
-    console.log(chalk.green.underline.bold("Autosave") + ":\tenabled");
+    clog(chalk.green.underline.bold("Autosave") + ":\tenabled");
     setInterval(() => {
       singleLine.log(
         `\tSaving \t${chalk.blue(`${players.length} player(s)`)}...`
@@ -44,5 +69,5 @@ require("@etabli/core/modloader")().then(() => {
         savePlayer(player);
       }
     }, parseDuration(saves.autosave.interval));
-  } else console.log(chalk.red.underline.bold("Autosave") + ":\tdisabled");
+  } else clog(chalk.red.underline.bold("Autosave") + ":\tdisabled");
 });

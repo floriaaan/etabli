@@ -1,6 +1,6 @@
 export const saves = {
   autosave: {
-    enabled: true,
+    enabled: false,
     interval: "3s",
   },
   path: "saves",
@@ -8,7 +8,7 @@ export const saves = {
 };
 
 export const modloader = {
-  enabled: true,
+  enabled: false,
   path: "mods",
 };
 
@@ -16,4 +16,10 @@ export const server = {
   enabled: true,
   port: 3000,
   webapp: { enabled: true, port: 8080 },
+  console: {
+    log: {
+      connections: true,
+      chat: true,
+    },
+  },
 };

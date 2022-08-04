@@ -14,12 +14,13 @@
     "test": "jest",
     "test:watch": "jest --watch"
   },
+  "author": "Florian LEROUX",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/floriaaan/etabli.git"
   },
-  "author": "",
   "license": "GNU-GPL-3.0",
+  "homepage": "https://github.com/floriaaan/etabli#readme",
   "bugs": {
     "url": "https://github.com/floriaaan/etabli/issues"
   },
@@ -30,7 +31,6 @@
     "@etabli/config": "dist/config",
     "mods": "mods"
   },
-  "homepage": "https://github.com/floriaaan/etabli#readme",
   "devDependencies": {
     "@types/inquirer": "^8.2.1",
     "@types/jest": "^28.1.6",
