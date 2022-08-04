@@ -1,26 +1,41 @@
 require("module-alias/register");
-const chalk = require("chalk");
+import chalk from "chalk";
+import parseDuration from "parse-duration";
+import singleLine from "@etabli/utils/console/singleLine";
+const httpServer = require("http").createServer();
+import { Server } from "socket.io";
 
 import { Player } from "@etabli/classes/entities/Player";
 import { savePlayer } from "@etabli/core/saver";
-import parseDuration from "parse-duration";
-import { saves } from "@etabli/config";
-import singleLine from "@etabli/utils/console/singleLine";
+import { saves, server } from "@etabli/config";
 
 require("@etabli/core/modloader")().then(() => {
-  const players = [];
+  let players = [];
 
-  const p: Player = new Player("Steve");
-  players.push(p);
+  // websocket server
+  if (server.enabled) {
+    console.log(chalk.green.underline.bold("Server") + ":\t\tenabled");
 
-  // check mod loading
-  // @ts-ignore
-  if (players[0].exampleMod) console.log("\t" + players[0].exampleMod());
+    const io = new Server(httpServer);
+    io.listen(server.port);
+    console.log("\tListening on port: " + server.port);
+    io.on("connection", (client) => {
+      client.on("name_entered", (data) => {
+        const player = new Player(data.name);
+        player.socketId = client.id;
+        players.push(player);
+      });
+
+      client.on("disconnect", () => {
+        players = players.filter((player) => player.socketId !== client.id);
+      });
+    });
+  } else console.log(chalk.red.underline.bold("Server") + ":\t\tdisabled");
 
   // check entity saving
   // @ts-ignore
   if (saves.autosave.enabled) {
-    console.log(chalk.green.bold("Autosave") + ":\tenabled");
+    console.log(chalk.green.underline.bold("Autosave") + ":\tenabled");
     setInterval(() => {
       singleLine.log(
         `\tSaving \t${chalk.blue(`${players.length} player(s)`)}...`
@@ -29,5 +44,5 @@ require("@etabli/core/modloader")().then(() => {
         savePlayer(player);
       }
     }, parseDuration(saves.autosave.interval));
-  } else console.log(chalk.red.bold("Autosave") + ":\tdisabled");
+  } else console.log(chalk.red.underline.bold("Autosave") + ":\tdisabled");
 });

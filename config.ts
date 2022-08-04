@@ -11,3 +11,9 @@ export const modloader = {
   enabled: true,
   path: "mods",
 };
+
+export const server = {
+  enabled: true,
+  port: 3000,
+  webapp: { enabled: true, port: 8080 },
+};
