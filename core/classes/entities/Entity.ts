@@ -12,13 +12,19 @@ export class Entity {
 
   public attackDamage: number;
 
-  constructor(key: string, name: string) {
+  constructor(key: string, name?: string | undefined) {
+    if (!key) throw "key is required";
+    if (!entities[key]) throw `${key} is not a valid entity key`;
+
     this.key = key;
 
-    this.name = name;
+    this.name = name || entities[key].name;
     this.health = entities[key].health;
     this.attackDamage = entities[key].attackDamage;
-    this.uuid = uuid(`${key}:${name}`, "630eb68f-e0fa-5ecc-887a-7c7a62614681");
+    this.uuid = uuid(
+      `${key}:${name || entities[key].name}`,
+      "630eb68f-e0fa-5ecc-887a-7c7a62614681"
+    );
   }
 
   public attack(entity: Entity) {

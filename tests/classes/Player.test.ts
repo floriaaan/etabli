@@ -33,7 +33,6 @@ describe("Player tests", () => {
 
   it("should have a slot full of dirt", () => {
     player.inventory.add("dirt", 64);
-    console.log(player.inventory.slots);
     expect(player.inventory.isSlotFull()).toBe(true);
   })
 
@@ -53,4 +52,5 @@ describe("Player tests", () => {
     expect(player.health).toBe(19);
   });
 
+  
 });

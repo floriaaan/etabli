@@ -7,6 +7,9 @@ export class Item {
   public enchants: { [key: string]: Enchant } = {};
 
   constructor(key: string) {
+    if (!key) throw "key is required";
+    if (!mixed[key]) throw `${key} is not a valid item key`;
+
     this.key = key;
 
     this.maxAmount = mixed[key].maxAmount;
@@ -20,4 +23,3 @@ export class Item {
 type Enchant = {
   level: number;
 };
-
