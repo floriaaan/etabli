@@ -17,7 +17,7 @@ socket.on("connect", async () => {
 
 
   // events listeners
-  socket.on("new_player", (playerName: string) => {
+  socket.on("player_join", (playerName: string) => {
     console.log(`${playerName} joined the game`);
   })
   socket.on("chat_message", (data: { message: string; playerName: string }) => {
