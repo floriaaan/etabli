@@ -41,7 +41,7 @@ export const log = (
         : "redBright"
     ].bold(level) +
       "\t" +
-      (date ? new Date().toISOString() + "  " : undefined) +
+      (date ? new Date().toISOString() + "  " : "\t") +
       (textColor ? chalk[textColor].bold(data) : data)
   );
 };
