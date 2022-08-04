@@ -17,7 +17,7 @@ describe("Inventory tests", () => {
   });
 
   it("should have items in inventory", () => {
-    i.add(new Item("apple"), 1);
+    i.add("apple", 1);
     expect(i.isEmpty()).toBe(false);
   });
 });

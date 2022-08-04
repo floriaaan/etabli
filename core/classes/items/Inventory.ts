@@ -1,15 +1,23 @@
 import { Block } from "@etabli/classes/items/Block";
 import { Item } from "@etabli/classes/items/Item";
 
+import items from "@etabli/resources/items";
+
 const DEFAULT_INVENTORY_SIZE = 4 * 9;
+const DEFAULT_ARMOR_INVENTORY_SIZE = 4;
 
 type InventorySlot = (Item | Block) & {
   amount: number;
 };
 
+type ArmorSlot = Item;
+
 export class Inventory {
-  private slots: InventorySlot[] = Array(DEFAULT_INVENTORY_SIZE).fill(null);
-  private selectedSlot: number = 0;
+  public slots: InventorySlot[] = Array(DEFAULT_INVENTORY_SIZE).fill(null);
+  public armorSlots: ArmorSlot[] = Array(DEFAULT_ARMOR_INVENTORY_SIZE).fill(
+    null
+  );
+  public selectedSlot: number = 0;
 
   constructor() {}
 
@@ -35,23 +43,23 @@ export class Inventory {
     return this.slots.some((slot) => slot !== null);
   }
 
-  public add(item: Item | Block, amount: number) {
+  public add(item: Item["key"], amount: number) {
     const slot = this.getFirstOccurenceSlot(item);
     if (slot === -1) {
-      this.slots[this.selectedSlot] = { ...item, amount };
+      const isBlock = items.blocks[item] !== undefined;
+
+      // TODO: fix
+      // @ts-ignore
+      this.slots[this.selectedSlot] = {
+        ...(isBlock ? new Block(item) : new Item(item)),
+        amount,
+      };
     } else {
       this.slots[slot].amount += amount;
     }
-
   }
   public remove(item: Item | Block, amount: number) {}
 
-  public getSelectedSlot(): Item | Block {
-    return this.slots[this.selectedSlot];
-  }
-  public setSelectedSlot(slot: number) {
-    this.selectedSlot = slot;
-  }
   public clearSlot(slot: number) {
     this.slots[slot] = null;
   }
@@ -63,7 +71,7 @@ export class Inventory {
     this.selectedSlot = this.slots.findIndex((slot) => slot !== null);
   }
 
-  public getFirstOccurenceSlot(item: Item | Block): number {
-    return this.slots.findIndex((slot) => slot?.key === item.key);
+  public getFirstOccurenceSlot(item: Item["key"]): number {
+    return this.slots.findIndex((slot) => slot?.key === item);
   }
 }

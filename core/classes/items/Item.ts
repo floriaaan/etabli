@@ -1,10 +1,23 @@
+import { mixed } from "@etabli/resources/items";
+
 export class Item {
   public key: string;
   public maxAmount: number = 0;
 
-  constructor(key: string, maxAmount: number = 0) {
+  public enchants: { [key: string]: Enchant } = {};
+
+  constructor(key: string) {
     this.key = key;
-    // todo: load from items.json
-    this.maxAmount = maxAmount;
+
+    this.maxAmount = mixed[key].maxAmount;
+  }
+
+  public hasEnchant(enchant: string): boolean {
+    return this.enchants[enchant] !== undefined;
   }
 }
+
+type Enchant = {
+  level: number;
+};
+

@@ -27,6 +27,7 @@
   "_moduleAliases": {
     "@etabli/core": "dist/core",
     "@etabli/classes": "dist/core/classes",
+    "@etabli/resources": "dist/core/resources",
     "@etabli/utils": "dist/utils",
     "@etabli/config": "dist/config",
     "mods": "mods"
