@@ -3,6 +3,7 @@ const socket = io("http://localhost:3000");
 import { prompt } from "inquirer";
 
 socket.on("connect", async () => {
+  //bootstrap
   console.log("Connected successfully");
   const input = await prompt([
     {
@@ -13,9 +14,19 @@ socket.on("connect", async () => {
   ]);
   socket.emit("name_entered", input);
 
-  socket.emit("chat_message", "hello guys");
 
+
+  // events listeners
+  socket.on("new_player", (playerName: string) => {
+    console.log(`${playerName} joined the game`);
+  })
   socket.on("chat_message", (data: { message: string; playerName: string }) => {
     console.log(`${data.playerName}: ${data.message}`);
   });
+
+
+  // events emitters
+
+  socket.emit("chat_message", "hello guys");
+
 });

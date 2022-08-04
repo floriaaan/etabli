@@ -33,6 +33,8 @@ require("@etabli/core/modloader")().then(() => {
         const player = new Player(data.name);
         player.socketId = client.id;
         players.push(player);
+
+        io.sockets.emit("new_player", data.name);
       });
 
       client.on("chat_message", (message) => {
