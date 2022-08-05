@@ -12,7 +12,8 @@
     "build": "tsc",
     "watch": "tsc-watch --onSuccess \"node ./dist/index.js\"",
     "test": "jest --coverage",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "mod:init": "echo 'no yet implemented'"
   },
   "author": "Florian LEROUX",
   "repository": {

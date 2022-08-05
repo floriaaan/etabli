@@ -100,13 +100,14 @@ To get a local copy up and running follow these simple example steps.
 
 ## Roadmap
 
-- [ ] Add web server feature
-- [ ] Add mod loader support
+- [x] Add web server feature
+- [x] Add mod loader support
+- [x] Add auto saver support
 - [ ] Add core
-  - [ ] Entity interfaces
-  - [ ] Player interfaces
-  - [ ] Item interfaces
-  - [ ] Block interfaces
+  - [ ] Entity interfaces (partial)
+  - [ ] Player interfaces (partial)
+  - [ ] Item interfaces (partial)
+  - [ ] Block interfaces (partial)
 
 See the [open issues](https://github.com/floriaaan/etabli/issues) for a full list of proposed features (and known issues).
 
