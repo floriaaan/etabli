@@ -1,5 +1,7 @@
 import { Inventory } from "@etabli/classes/items/Inventory";
 import { entities } from "@etabli/resources/entities";
+import { log } from "@etabli/utils/console/log";
+import { Coordinates } from "@etabli/types/Coordinates";
 import { v5 as uuid } from "uuid";
 
 export class Entity {
@@ -11,6 +13,8 @@ export class Entity {
   public inventory: Inventory = new Inventory();
 
   public attackDamage: number;
+
+  public position: Coordinates = [0, 0, 0];
 
   constructor(key: string, name?: string | undefined) {
     if (!key) throw "key is required";
@@ -44,5 +48,10 @@ export class Entity {
     if (entity.health <= 0) entity.die();
   }
 
-  public die() {}
+  public die() {
+    if (this.key === "player") {
+      log(`${this.name} has died`, { date: false });
+    }
+    this.inventory.explode();
+  }
 }

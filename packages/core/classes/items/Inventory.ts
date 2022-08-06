@@ -74,4 +74,15 @@ export class Inventory {
   public getFirstOccurenceSlot(item: Item["key"]): number {
     return this.slots.findIndex((slot) => slot?.key === item);
   }
+
+  // TODO: gamerule keepInventory ?
+  public explode() {
+    // drop items
+
+    // remove all items
+    this.armorSlots = this.armorSlots.map((i) =>
+      i.hasEnchant("soulbound") ? i : null
+    );
+    this.slots = this.slots.map((i) => (i.hasEnchant("soulbound") ? i : null));
+  }
 }
