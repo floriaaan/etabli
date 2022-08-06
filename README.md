@@ -5,6 +5,7 @@
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
+[![Code coverage][coverage-shield]][coverage-url]
 
 <!-- PROJECT LOGO -->
 <br />
@@ -99,13 +100,14 @@ To get a local copy up and running follow these simple example steps.
 
 ## Roadmap
 
-- [ ] Add web server feature
-- [ ] Add mod loader support
+- [x] Add web server feature
+- [x] Add mod loader support
+- [x] Add auto saver support
 - [ ] Add core
-  - [ ] Entity interfaces
-  - [ ] Player interfaces
-  - [ ] Item interfaces
-  - [ ] Block interfaces
+  - [ ] Entity interfaces (partial)
+  - [ ] Player interfaces (partial)
+  - [ ] Item interfaces (partial)
+  - [ ] Block interfaces (partial)
 
 See the [open issues](https://github.com/floriaaan/etabli/issues) for a full list of proposed features (and known issues).
 
@@ -132,27 +134,29 @@ Don't forget to give the project a star! Thanks again!
 
 ## License
 
-Distributed under the AGPL 3.0 License. See `LICENSE.txt` for more information.
+Distributed under the AGPL 3.0 License. See `LICENSE` for more information.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 
-[contributors-shield]: https://img.shields.io/github/contributors/floriaaan/etabli.svg?style=flat-square
+[contributors-shield]: https://img.shields.io/github/contributors/floriaaan/etabli.svg
 [contributors-url]: https://github.com/floriaaan/etabli/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/floriaaan/etabli.svg?style=flat-square
+[forks-shield]: https://img.shields.io/github/forks/floriaaan/etabli.svg
 [forks-url]: https://github.com/floriaaan/etabli/network/members
-[stars-shield]: https://img.shields.io/github/stars/floriaaan/etabli.svg?style=flat-square
+[stars-shield]: https://img.shields.io/github/stars/floriaaan/etabli.svg
 [stars-url]: https://github.com/floriaaan/etabli/stargazers
-[issues-shield]: https://img.shields.io/github/issues/floriaaan/etabli.svg?style=flat-square
+[issues-shield]: https://img.shields.io/github/issues/floriaaan/etabli.svg
 [issues-url]: https://github.com/floriaaan/etabli/issues
-[license-shield]: https://img.shields.io/github/license/floriaaan/etabli.svg?style=flat-square
-[license-url]: https://github.com/floriaaan/etabli/blob/master/LICENSE.txt
+[license-shield]: https://img.shields.io/github/license/floriaaan/etabli.svg
+[license-url]: https://github.com/floriaaan/etabli/blob/master/LICENSE
+[coverage-shield]: https://codecov.io/gh/floriaaan/etabli/branch/develop/graph/badge.svg?token=140LKRPY5O
+[coverage-url]: https://github.com/floriaaan/etabli/
 [product-screenshot]: ./docs/images/screenshot.png
-[next.js]: https://img.shields.io/badge/next.js-000000?style=flat-square&logo=nextdotjs&logoColor=white
+[next.js]: https://img.shields.io/badge/next.js-000000&logo=nextdotjs&logoColor=white
 [next-url]: https://nextjs.org/
-[react]: https://img.shields.io/badge/React-20232A?style=flat-square&logo=react&logoColor=61DAFB
+[react]: https://img.shields.io/badge/React-20232A&logo=react&logoColor=61DAFB
 [react-url]: https://reactjs.org/
-[typescript]: https://img.shields.io/badge/Typescript-20232A?style=flat-square&logo=typescript&logoColor=3178C6
+[typescript]: https://img.shields.io/badge/Typescript-20232A&logo=typescript&logoColor=3178C6
 [ts-url]: https://www.typescriptlang.org/

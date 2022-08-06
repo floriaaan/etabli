@@ -11,8 +11,9 @@
     "start:server": "concurrently -r \"npm run start\" \"npm run start:webapp\"",
     "build": "tsc",
     "watch": "tsc-watch --onSuccess \"node ./dist/index.js\"",
-    "test": "jest",
-    "test:watch": "jest --watch"
+    "test": "jest --coverage",
+    "test:watch": "jest --watch",
+    "mod:init": "echo 'no yet implemented'"
   },
   "author": "Florian LEROUX",
   "repository": {
@@ -27,6 +28,7 @@
   "_moduleAliases": {
     "@etabli/core": "dist/core",
     "@etabli/classes": "dist/core/classes",
+    "@etabli/resources": "dist/core/resources",
     "@etabli/utils": "dist/utils",
     "@etabli/config": "dist/config",
     "mods": "mods"

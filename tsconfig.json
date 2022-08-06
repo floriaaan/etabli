@@ -9,6 +9,7 @@
     "baseUrl": ".",
     "paths": {
       "@etabli/classes/*": ["core/classes/*"],
+      "@etabli/resources/*": ["core/resources/*"],
       "@etabli/core/*": ["core/*"],
       "@etabli/utils/*": ["utils/*"],
       "@etabli/config": ["config"]

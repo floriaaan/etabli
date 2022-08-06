@@ -15,19 +15,42 @@ describe("Player tests", () => {
 
   it("should have a key of 'player'", () => {
     expect(player.key).toBe("player");
-  })
+  });
 
   it("should have an inventory", () => {
     expect(player.inventory).toBeDefined();
-  })
+  });
 
-  it("should have an empty inventory", () => {
+  it("should have an empty inventory by default", () => {
     expect(player.inventory.isEmpty()).toBe(true);
+  });
+
+  it("can add an item to the inventory", () => {
+    player.inventory.add("apple", 1);
+    player.inventory.add("dirt", 64);
+    expect(player.inventory.isEmpty()).toBe(false);
   })
 
-  // it("should have items in inventory", () => {
-  //   player.inventory.add(new Item("apple", 1), 1);
-  //   expect(player.inventory.isEmpty()).toBe(false);
-  // })
+  it("should have a slot full of dirt", () => {
+    player.inventory.add("dirt", 64);
+    expect(player.inventory.isSlotFull()).toBe(true);
+  })
 
+  it("can attack other entities", () => {
+    const other = new Player("Bob");
+    player.attack(other);
+    expect(other.health).toBe(16);
+  });
+
+  it("should be hurt when attack other entities with thorn enchant", () => {
+    const other = new Player("Bob");
+    other.inventory.armorSlots[0] = new Item("diamond_helmet");
+    other.inventory.armorSlots[0].enchants["thorns"] = { level: 1 };
+
+    player.attack(other);
+
+    expect(player.health).toBe(19);
+  });
+
+  
 });
