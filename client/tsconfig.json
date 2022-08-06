@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "module": "CommonJS",
+    "module": "ES2020",
     "target": "ESNext",
     "lib": ["es2015", "DOM"],
     "moduleResolution": "node",
@@ -9,6 +9,7 @@
     "baseUrl": "..",
     "paths": {
       "@etabli/classes/*": ["core/classes/*"],
+      "@etabli/client/*": ["client/*"],
       "@etabli/core/*": ["core/*"],
       "@etabli/utils/*": ["utils/*"],
       "@etabli/config": ["config"]
