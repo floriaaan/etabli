@@ -5,18 +5,27 @@ export const saves = {
   },
   path: "saves",
   world: "world",
+  console: {
+    log: {
+      players: false,
+    },
+  },
 };
 
 export const modloader = {
   enabled: true,
   path: "mods",
+  console: {
+    log: {
+      loading: false,
+    },
+  },
 };
 
 export const server = {
   enabled: true,
   port: 3000,
-  // todo: fix in vite.config.ts
-  webapp: { enabled: true, port: 8080 },
+  webapp: { enabled: false, port: 8080 },
   console: {
     log: {
       connections: true,
@@ -24,3 +33,4 @@ export const server = {
     },
   },
 };
+
