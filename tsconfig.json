@@ -14,7 +14,8 @@
       "@etabli/core/*": ["core/*"],
       "@etabli/types/*": ["types/*"],
       "@etabli/utils/*": ["utils/*"],
-      "@etabli/config": ["config"]
+      "@etabli/config": ["config"],
+      "@etabli": ["index"]
     },
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,

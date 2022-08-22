@@ -5,7 +5,8 @@ import { generateWorld } from "@etabli/core/world/generation";
 module.exports = async function bootstrap(
   players: Player[]
 ): Promise<BootstrapApp> {
-  const world = generateWorld();
+  //todo: pass a ref to this variable to the server so it can be updated
+  let world = generateWorld();
 
   const plugins = await Promise.all([
     await require("@etabli/core/ascii")(),

@@ -1,22 +1,49 @@
+
+
+// # arguments
+// soloplayer : inits the server
+// import yargs from "yargs";
+// import { hideBin } from "yargs/helpers";
+// import { initServer } from "@etabli/server";
+// const argv = yargs(hideBin(process.argv)).argv as unknown as {
+//   soloplayer: boolean;
+// };
+// if (argv.soloplayer) {
+//   initServer();
+// }
+
+// import inquirer from "inquirer";
+// const { prompt } = inquirer;
+
+import {World} from "@etabli/classes/World/World";
+
+let world: World;
+
+// # server connection
 import { io } from "socket.io-client";
-const socket = io("http://localhost:3000");
-import inquirer from "inquirer";
+const url = `http://localhost:3000`;
+const socket = io(url);
 
-const { prompt } = inquirer;
-
-socket.on("connect", async () => {
+socket.on("connection", async () => {
   //bootstrap
-  console.log("Connected successfully");
-  const input = await prompt([
-    {
-      type: "input",
-      name: "name",
-      message: "What's your name",
-    },
-  ]);
+  console.log("Connected successfully to: " + url);
+  // const input = await prompt([
+  //   {
+  //     type: "input",
+  //     name: "name",
+  //     message: "What's your name",
+  //   },
+  // ]);
+  const input = { name: "John" };
+
   socket.emit("name_entered", input);
 
   // events listeners
+  socket.on("world_loading", (data) => {
+    console.log(data)
+  })
+
+
   socket.on("player_join", (playerName: string) => {
     console.log(`${playerName} joined the game`);
   });
@@ -25,42 +52,5 @@ socket.on("connect", async () => {
   });
 
   // events emitters
-
   socket.emit("chat_message", "hello guys");
 });
-
-// import { Engine } from 'noa-engine'
-// import { initRegistration } from './utils/registration'
-// import { initWorldGen } from './utils/worldgen'
-// import { setupPlayerEntity } from './utils/entities'
-// import { setupInteractions } from './utils/actions'
-
-// const noa = new Engine({
-//   debug: true,
-//   showFPS: true,
-//   inverseY: false,
-//   inverseX: false,
-//   chunkSize: 32,
-//   chunkAddDistance: [2, 1.5],     // [horiz, vert]
-//   blockTestDistance: 50,
-//   texturePath: 'textures/',
-//   playerStart: [0.5, 5, 0.5],
-//   playerHeight: 1.4,
-//   playerWidth: 0.6,
-//   playerAutoStep: true,
-//   useAO: true,
-//   AOmultipliers: [0.92, 0.8, 0.5],
-//   reverseAOmultiplier: 1.0,
-//   manuallyControlChunkLoading: false,
-//   originRebaseDistance: 25,
-// })
-
-// const blockIDs = initRegistration(noa)
-
-// initWorldGen(noa, blockIDs)
-
-// // adds a mesh to player
-// setupPlayerEntity(noa)
-
-// // does stuff on button presses
-// setupInteractions(noa)

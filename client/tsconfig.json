@@ -10,14 +10,16 @@
     "paths": {
       "@etabli/classes/*": ["core/classes/*"],
       "@etabli/client/*": ["client/*"],
+      "@etabli/resources/*": ["core/resources/*"],
       "@etabli/core/*": ["core/*"],
+      "@etabli/types/*": ["types/*"],
       "@etabli/utils/*": ["utils/*"],
-      "@etabli/config": ["config"]
+      "@etabli/config": ["config"],
     },
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "esModuleInterop": true
   },
   "include": ["**/*"],
-  "exclude": ["node_modules", "src/types"]
+  "exclude": ["node_modules"]
 }

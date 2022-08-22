@@ -5,10 +5,14 @@ import chalk from "chalk";
 import { server as serverConfig } from "@etabli/config";
 import { Server } from "socket.io";
 import { portInUse } from "@etabli/utils/server/portInUse";
+import { World } from "@etabli/classes/world/World";
 
 const clog = console.log;
 
-module.exports = async function server(players: Player[]): Promise<Server> {
+module.exports = async function server(
+  players: Player[],
+  world: World
+): Promise<Server> {
   if (serverConfig.enabled) {
     clog(chalk.green.underline.bold("Server") + ":\t\tenabled");
 
@@ -28,6 +32,8 @@ module.exports = async function server(players: Player[]): Promise<Server> {
       io.listen(serverConfig.port);
       clog("\tListening on port: " + serverConfig.port);
       io.on("connection", (client) => {
+        client.emit("world_loading", world.toCompressed());
+
         client.on("name_entered", (data) => {
           if (serverConfig.console.log.connections) {
             log(`${data.name} joined the game`, {
@@ -43,6 +49,11 @@ module.exports = async function server(players: Player[]): Promise<Server> {
 
           if (serverConfig.webapp.enabled)
             io.sockets.emit("webapp:players", players);
+        });
+
+        client.on("world_update", (data) => {
+          world = World.fromCompressed(data);
+          io.sockets.emit("world_updated", world.toCompressed());
         });
 
         client.on("chat_message", (message) => {
