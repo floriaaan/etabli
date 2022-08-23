@@ -19,6 +19,7 @@ async function server(players: Player[], world: World): Promise<Server> {
         cors: {
           origin: "*",
         },
+        maxHttpBufferSize: 1e8,
       });
 
       // check if there is already a server running
@@ -48,10 +49,10 @@ async function server(players: Player[], world: World): Promise<Server> {
             io.sockets.emit("webapp:players", players);
         });
 
-        client.on("world_update", (data) => {
-          world = World.fromCompressed(data);
-          io.sockets.emit("world_updated", world.toCompressed());
-        });
+        // client.on("world_update", (data) => {
+        //   world = World.fromCompressed(data);
+        //   io.sockets.emit("world_updated", world.toCompressed());
+        // });
 
         client.on("chat_message", (message) => {
           const playerName = players.find(

@@ -1,6 +1,6 @@
 import { Block } from "@etabli/classes/items/Block";
 import { DEFAULT_GENERATION_OPTIONS } from "@etabli/classes/world/constants";
-import { compress, Compressed, decompress } from "compress-json";
+import { pack, unpack } from "msgpackr";
 
 class ChunkBlock extends Block {
   constructor(key: string) {
@@ -44,11 +44,11 @@ export class Chunk {
     this.data[x][y][z] = block;
   }
 
-  public toCompressed(): Compressed {
-    return compress(this.data);
+  public toCompressed(): Buffer {
+    return pack(this.data);
   }
 
-  public static fromCompressed(c: Compressed): Chunk {
-    return decompress(c) as Chunk;
+  public static fromCompressed(c: Buffer): Chunk {
+    return unpack(c) as Chunk;
   }
 }

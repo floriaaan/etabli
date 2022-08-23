@@ -24,5 +24,5 @@ export default {
     json(),
     typescript(),
   ],
-  external: ["chalk"],
+  external: ["chalk",],
 };
