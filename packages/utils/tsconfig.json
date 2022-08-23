@@ -1,23 +1,14 @@
 {
+  "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "module": "ESNext",
-    "target": "ESNext",
-    "lib": ["es2015", "DOM"],
-    "moduleResolution": "node",
-    "sourceMap": true,
-    "baseUrl": ".",
+    "baseUrl": "../../.",
     "paths": {
       "@etabli/classes/*": ["packages/core/classes/*"],
       "@etabli/resources/*": ["packages/core/resources/*"],
       "@etabli/core/*": ["packages/core/*"],
       "@etabli/utils/*": ["packages/utils/*"],
       "@etabli/config": ["packages/server/config"]
-    },
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "esModuleInterop": true,
-    "resolveJsonModule": true
+    }
   },
   "include": ["**/*"],
-  "exclude": []
 }

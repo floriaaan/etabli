@@ -2,12 +2,12 @@ import { readdir } from "fs/promises";
 import { isDir } from "@etabli/utils/filesystem/isDir";
 import { modloader } from "@etabli/config";
 
-const chalk = require("chalk");
+import chalk from "chalk";
 
 const MOD_DIR = modloader.path;
 
-module.exports = modloader.enabled
-  ? async function modLoader() {
+const modLoader = modloader.enabled
+  ? async () => {
       console.log(chalk.underline.green.bold("Modloader") + ":\tenabled");
 
       // search for directories in the mod directory
@@ -18,8 +18,13 @@ module.exports = modloader.enabled
           // load the mod
           console.log(`\tLoading mod:\t${modDir}`);
           try {
-            await require(`${MOD_DIR}/${modDir}/index`)();
-            console.log(`\tMod loaded:\t${modDir}`);
+            // @ts-ignore
+
+            const modInit = await import(`../${MOD_DIR}/${modDir}/dist/index.js`);
+            if (modInit.default) {
+              await modInit.default();
+              console.log(`\tMod loaded:\t${modDir}`);
+            }
           } catch (err) {
             console.error(err);
           }
@@ -30,3 +35,6 @@ module.exports = modloader.enabled
       console.log(chalk.underline.red.bold("Modloader") + ":\tdisabled");
       return Promise.resolve();
     };
+
+export { modLoader };
+export default modLoader;
