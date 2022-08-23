@@ -2,17 +2,22 @@ import { BootstrapApp } from "@etabli/types/Bootstrap";
 import { Player } from "@etabli/classes/entities/Player";
 import { generateWorld } from "@etabli/core/world/generation";
 
-module.exports = async function bootstrap(
+async function bootstrap(
   players: Player[]
 ): Promise<BootstrapApp> {
   //todo: pass a ref to this variable to the server so it can be updated
   let world = generateWorld();
 
+  const ascii = await import("@etabli/core/ascii");
+  const modloader = await import("@etabli/core/modloader");
+  const server = await import("@etabli/core/server");
+  const saver = await import("@etabli/core/saver");
+
   const plugins = await Promise.all([
-    await require("@etabli/core/ascii")(),
-    require("@etabli/core/modloader")(),
-    require("@etabli/core/server")(players, world),
-    require("@etabli/core/saver")(players, world),
+    await ascii.default(),
+    modloader.default() as Promise<string[]>,
+    server.default(players, world),
+    saver.default(players, world),
     // require("@etabli/core/world/generation"),
   ]);
 
@@ -22,3 +27,5 @@ module.exports = async function bootstrap(
     server: plugins[2],
   };
 };
+
+export default bootstrap;

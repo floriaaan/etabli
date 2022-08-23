@@ -9,15 +9,12 @@ import { World } from "@etabli/classes/world/World";
 
 const clog = console.log;
 
-module.exports = async function server(
-  players: Player[],
-  world: World
-): Promise<Server> {
+async function server(players: Player[], world: World): Promise<Server> {
   if (serverConfig.enabled) {
     clog(chalk.green.underline.bold("Server") + ":\t\tenabled");
 
     try {
-      const httpServer = require("http").createServer();
+      const httpServer = (await import("http")).createServer();
       const io = new Server(httpServer, {
         cors: {
           origin: "*",
@@ -112,4 +109,6 @@ module.exports = async function server(
   } else clog(chalk.red.underline.bold("Server") + ":\t\tdisabled");
 
   return Promise.resolve(null);
-};
+}
+
+export default server;

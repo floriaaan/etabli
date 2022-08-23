@@ -8,6 +8,7 @@ import { saves } from "@etabli/config";
 import chalk from "chalk";
 import singleLine from "@etabli/utils/console/singleLine";
 import parseDuration from "parse-duration";
+import { World } from "@etabli/classes/World/World";
 
 const SAVES_DIR = saves.path;
 const WORLD_DIR = saves.world;
@@ -25,7 +26,7 @@ export const savePlayer = async (player: Player) => {
 };
 
 const clog = console.log;
-module.exports = async function autosaver(players: Player[]) {
+async function autosaver(players: Player[], world: World) {
   // check entity saving
   try {
     if (saves.autosave.enabled) {
@@ -52,4 +53,6 @@ module.exports = async function autosaver(players: Player[]) {
       }
     );
   }
-};
+}
+
+export default autosaver;

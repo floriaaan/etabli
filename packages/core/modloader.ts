@@ -45,5 +45,4 @@ const modLoader = modloader.enabled
       return Promise.resolve([]);
     };
 
-export { modLoader };
 export default modLoader;
