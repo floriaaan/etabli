@@ -1,6 +1,7 @@
 import { io } from "socket.io-client";
 const socket = io("http://localhost:3000");
-import { prompt } from "inquirer";
+import inquirer from "inquirer";
+const { prompt } = inquirer;
 
 socket.on("connect", async () => {
   //bootstrap
@@ -14,19 +15,15 @@ socket.on("connect", async () => {
   ]);
   socket.emit("name_entered", input);
 
-
-
   // events listeners
   socket.on("player_join", (playerName: string) => {
     console.log(`${playerName} joined the game`);
-  })
+  });
   socket.on("chat_message", (data: { message: string; playerName: string }) => {
     console.log(`${data.playerName}: ${data.message}`);
   });
 
-
   // events emitters
 
   socket.emit("chat_message", "hello guys");
-
 });

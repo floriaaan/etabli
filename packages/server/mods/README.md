@@ -1,7 +1,7 @@
 <div align="center">
   <a href="https://github.com/floriaaan/etabli">
     <!-- <img src="../docs/images/mods.png" alt="Logo" width="426" height="168"> -->
-    <img src="../docs/images/logo_wide.png" alt="Logo" width="426" height="168">
+    <img src="../../../docs/images/logo_wide.png" alt="Logo" width="426" height="168">
   </a>
   <p align="center">
     Etabli mods, to customize the Etabli game experience the way you want.
@@ -39,5 +39,5 @@ To get a local copy up and running follow these simple example steps.
 4. Start develop the mod project
 
    ```sh
-   cd mods/<your_mod_name>
+   cd packages/server/mods/<your_mod_name>
    ```

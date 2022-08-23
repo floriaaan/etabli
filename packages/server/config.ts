@@ -1,6 +1,6 @@
 export const saves = {
   autosave: {
-    enabled: false,
+    enabled: true,
     interval: "3s",
   },
   path: "saves",
@@ -8,13 +8,14 @@ export const saves = {
 };
 
 export const modloader = {
-  enabled: false,
+  enabled: true,
   path: "mods",
 };
 
 export const server = {
   enabled: true,
   port: 3000,
+  // todo: fix in vite.config.ts
   webapp: { enabled: true, port: 8080 },
   console: {
     log: {

@@ -5,7 +5,7 @@
     "lib": ["es2015", "DOM"],
     "moduleResolution": "node",
     "sourceMap": true,
-    "baseUrl": ".",
+    "baseUrl": "../../../../",
     "paths": {
       "@etabli/classes/*": ["packages/core/classes/*"],
       "@etabli/resources/*": ["packages/core/resources/*"],

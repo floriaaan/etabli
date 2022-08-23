@@ -1,4 +1,3 @@
-require("module-alias/register");
 import chalk from "chalk";
 import parseDuration from "parse-duration";
 import singleLine from "@etabli/utils/console/singleLine";
@@ -12,16 +11,18 @@ import { portInUse } from "@etabli/utils/server/portInUse";
 
 const clog = console.log;
 
-require("@etabli/core/modloader")()
-  .then(async () => {
-    let players: Player[] = [];
+import { modLoader } from "@etabli/core/modloader";
 
+modLoader()
+  .then(async () => {
+    let players: Player[] = [];    
+  
     // websocket server
     if (server.enabled) {
       clog(chalk.green.underline.bold("Server") + ":\t\tenabled");
 
       try {
-        const httpServer = require("http").createServer();
+        const httpServer = (await import("http")).createServer();
         const io = new Server(httpServer, {
           cors: {
             origin: "*",
