@@ -6,7 +6,7 @@ import json from "@rollup/plugin-json";
 export default {
   input: "index.ts",
   output: {
-    file: "dist/index.js",
+    dir: "dist",
     format: "esm",
     minifyInternalExports: true,
     sourcemap: true,

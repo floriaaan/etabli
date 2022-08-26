@@ -11,7 +11,8 @@
       "@etabli/resources/*": ["packages/core/resources/*"],
       "@etabli/core/*": ["packages/core/*"],
       "@etabli/utils/*": ["packages/utils/*"],
-      "@etabli/config": ["packages/server/config"]
+      "@etabli/config": ["packages/server/config"],
+      "@etabli/types/*": ["types/*"]
     },
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,

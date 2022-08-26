@@ -1,29 +1,61 @@
+import { Player } from "@etabli/classes/entities/Player";
+import { World } from "@etabli/classes/world/World";
 import { io } from "socket.io-client";
-const socket = io("http://localhost:3000");
-import inquirer from "inquirer";
-const { prompt } = inquirer;
+const url = `http://127.0.0.1:3000`;
+const socket = io(url, { autoConnect: true, reconnection: true });
+
+let world: World;
+let player: Player;
+let players: Player[];
+
+
+
+const player_name_input = document.getElementById(
+    "player_name"
+  ) as HTMLInputElement;
+  const player_name_form = document.getElementById(
+    "player_name_form"
+  ) as HTMLFormElement;
+  
+  player_name_form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    socket.emit("name_entered", { name: player_name_input.value });
+  });
+  
+
+console.log("Connecting to server...", url);
 
 socket.on("connect", async () => {
   //bootstrap
-  console.log("Connected successfully");
-  const input = await prompt([
-    {
-      type: "input",
-      name: "name",
-      message: "What's your name",
-    },
-  ]);
-  socket.emit("name_entered", input);
-
-  // events listeners
-  socket.on("player_join", (playerName: string) => {
-    console.log(`${playerName} joined the game`);
+  console.log("Connected successfully to: " + url);
+  socket.on("world_loading", (data) => {
+    let buffer = new Uint8Array(data);
+    world = World.fromCompressed(buffer as Buffer);
+    console.log(world);
   });
-  socket.on("chat_message", (data: { message: string; playerName: string }) => {
-    console.log(`${data.playerName}: ${data.message}`);
+  socket.on("player_joined", (data) => {
+    let buffer = new Uint8Array(data);
+    player = Player.fromCompressed(buffer as Buffer);
+    console.log(player);
+
+    player_name_form.remove();
+
   });
 
-  // events emitters
+  socket.on("player_join", (data) => {
+    players = data.map((playerBuffer) => {
+      let buffer = new Uint8Array(playerBuffer);
+      return Player.fromCompressed(buffer as Buffer);
+    });
+    console.log(players);
+  });
 
-  socket.emit("chat_message", "hello guys");
+  socket.on("player_left", (data) => {
+    players = data.map((playerBuffer) => {
+      let buffer = new Uint8Array(playerBuffer);
+      return Player.fromCompressed(buffer as Buffer);
+    });
+    console.log(players);
+  });
 });
+

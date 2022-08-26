@@ -23,3 +23,6 @@ client.js
 # ide related files
 .idea/**
 .vscode/**
+
+# macos
+*.DS_Store

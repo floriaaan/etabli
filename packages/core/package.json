@@ -11,6 +11,9 @@
   "license": "ISC",
   "dependencies": {
     "chalk": "^5.0.1",
+    "msgpackr": "^1.6.2",
+    "parse-duration": "^1.0.2",
+    "socket.io": "^4.5.1",
     "uuid": "^8.3.2"
   }
 }
