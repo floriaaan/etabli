@@ -1,74 +1,61 @@
-// # server connection
+import { Player } from "@etabli/classes/entities/Player";
 import { World } from "@etabli/classes/world/World";
-import inquirer from "inquirer";
 import { io } from "socket.io-client";
 const url = `http://127.0.0.1:3000`;
 const socket = io(url, { autoConnect: true, reconnection: true });
 
-console.log("Connecting to server...", url);
-
 let world: World;
+let player: Player;
+let players: Player[];
+
+
+
+const player_name_input = document.getElementById(
+    "player_name"
+  ) as HTMLInputElement;
+  const player_name_form = document.getElementById(
+    "player_name_form"
+  ) as HTMLFormElement;
+  
+  player_name_form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    socket.emit("name_entered", { name: player_name_input.value });
+  });
+  
+
+console.log("Connecting to server...", url);
 
 socket.on("connect", async () => {
   //bootstrap
   console.log("Connected successfully to: " + url);
-
-  // events listeners
   socket.on("world_loading", (data) => {
-    let buffer = Buffer.from(data);
-    world = World.fromCompressed(buffer);
+    let buffer = new Uint8Array(data);
+    world = World.fromCompressed(buffer as Buffer);
+    console.log(world);
+  });
+  socket.on("player_joined", (data) => {
+    let buffer = new Uint8Array(data);
+    player = Player.fromCompressed(buffer as Buffer);
+    console.log(player);
+
+    player_name_form.remove();
+
   });
 
-  const input = await inquirer.prompt([
-    {
-      type: "input",
-      name: "name",
-      message: "Enter your name:",
-    },
-  ]);
-  socket.emit("name_entered", input);
+  socket.on("player_join", (data) => {
+    players = data.map((playerBuffer) => {
+      let buffer = new Uint8Array(playerBuffer);
+      return Player.fromCompressed(buffer as Buffer);
+    });
+    console.log(players);
+  });
+
+  socket.on("player_left", (data) => {
+    players = data.map((playerBuffer) => {
+      let buffer = new Uint8Array(playerBuffer);
+      return Player.fromCompressed(buffer as Buffer);
+    });
+    console.log(players);
+  });
 });
 
-socket.on("player_join", (playerName: string) => {
-  console.log(`${playerName} joined the game`);
-});
-socket.on("chat_message", (data: { message: string; playerName: string }) => {
-  console.log(`${data.playerName}: ${data.message}`);
-});
-
-// events emitters
-socket.on("disconnect", () => {
-  console.log("Disconnected from server");
-});
-
-socket.on("error", (error) => {
-  console.log(error);
-});
-
-socket.on("reconnect_attempt", () => {
-  console.log("Reconnecting to server...");
-});
-
-socket.on("reconnect_error", (error) => {
-  console.log(error);
-});
-
-socket.on("reconnect_failed", () => {
-  console.log("Reconnection failed");
-});
-
-socket.on("reconnect", () => {
-  console.log("Reconnected to server");
-});
-
-socket.on("reconnecting", (attemptNumber) => {
-  console.log(`Reconnecting to server... ${attemptNumber}`);
-});
-
-socket.on("connect_failed", () => {
-  console.log("Connection failed");
-});
-
-socket.on("connect_error", (error) => {
-  console.log(error);
-});

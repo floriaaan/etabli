@@ -43,7 +43,12 @@ async function server(players: Player[], world: World): Promise<Server> {
           player.socketId = client.id;
           players.push(player);
 
-          io.sockets.emit("player_join", data.name);
+          client.emit("player_joined", player.toCompressed());
+
+          io.sockets.emit(
+            "player_join",
+            players.map((p) => p.toCompressed())
+          );
 
           if (serverConfig.webapp.enabled)
             io.sockets.emit("webapp:players", players);
@@ -75,7 +80,7 @@ async function server(players: Player[], world: World): Promise<Server> {
 
             io.sockets.emit(
               "player_left",
-              players.map((p) => p.name)
+              players.map((p) => p.toCompressed())
             );
             if (serverConfig.webapp.enabled)
               io.sockets.emit("webapp:players", players);
