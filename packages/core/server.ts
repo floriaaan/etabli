@@ -37,6 +37,7 @@ async function server(players: Player[], world: World): Promise<Server> {
             log(`${data.name} joined the game`, {
               textColor: "yellowBright",
               date: true,
+              type: "connections"
             });
           }
           const player = new Player(data.name);
@@ -63,7 +64,7 @@ async function server(players: Player[], world: World): Promise<Server> {
           const playerName = players.find(
             (p) => p.socketId === client.id
           )?.name;
-          log(`${playerName}: ${message}`, { date: true });
+          log(`${playerName}: ${message}`, { date: true, type: "chat" });
           io.sockets.emit("chat_message", { playerName, message });
         });
 
@@ -74,6 +75,7 @@ async function server(players: Player[], world: World): Promise<Server> {
               log(`${player.name} left the game`, {
                 textColor: "yellowBright",
                 date: true,
+                type: "connections",
               });
             }
             players = players.filter((player) => player.socketId !== client.id);
@@ -85,9 +87,10 @@ async function server(players: Player[], world: World): Promise<Server> {
             if (serverConfig.webapp.enabled)
               io.sockets.emit("webapp:players", players);
           } else
-            log(`Someone left the game`, {
+            log(`Someone left the game (${client.handshake.address})`, {
               textColor: "cyan",
               date: true,
+              type: "connections",
             });
         });
 
@@ -106,7 +109,8 @@ async function server(players: Player[], world: World): Promise<Server> {
           : "An error occured with server",
         {
           textColor: "red",
-          level: "ERROR",
+          level: "FAIL",
+          type: "crash",
         }
       );
 

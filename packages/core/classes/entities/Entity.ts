@@ -50,7 +50,7 @@ export class Entity {
 
   public die() {
     if (this.key === "player") {
-      log(`${this.name} has died`, { date: false });
+      log(`${this.name} has died`, { date: false, type: "chat" });
     }
     this.inventory.explode();
   }

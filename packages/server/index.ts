@@ -19,7 +19,8 @@ export async function initServer() {
           : "An error occured with bootstrap",
         {
           textColor: "red",
-          level: "ERROR",
+          level: "FAIL",
+          type: "crash",
         }
       );
     });

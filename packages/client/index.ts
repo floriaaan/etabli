@@ -8,26 +8,26 @@ let world: World;
 let player: Player;
 let players: Player[];
 
-
-
 const player_name_input = document.getElementById(
-    "player_name"
-  ) as HTMLInputElement;
-  const player_name_form = document.getElementById(
-    "player_name_form"
-  ) as HTMLFormElement;
-  
-  player_name_form.addEventListener("submit", (e) => {
-    e.preventDefault();
-    socket.emit("name_entered", { name: player_name_input.value });
-  });
-  
+  "player_name"
+) as HTMLInputElement;
+const player_name_form = document.getElementById(
+  "player_name_form"
+) as HTMLFormElement;
+
+player_name_form.addEventListener("submit", (e) => {
+  e.preventDefault();
+  socket.emit("name_entered", { name: player_name_input.value });
+  player_name_input.value = "";
+});
 
 console.log("Connecting to server...", url);
 
 socket.on("connect", async () => {
   //bootstrap
   console.log("Connected successfully to: " + url);
+  player_name_form.style.display = "block";
+
   socket.on("world_loading", (data) => {
     let buffer = new Uint8Array(data);
     world = World.fromCompressed(buffer as Buffer);
@@ -38,8 +38,7 @@ socket.on("connect", async () => {
     player = Player.fromCompressed(buffer as Buffer);
     console.log(player);
 
-    player_name_form.remove();
-
+    player_name_form.style.display = "none";
   });
 
   socket.on("player_join", (data) => {
@@ -59,3 +58,6 @@ socket.on("connect", async () => {
   });
 });
 
+socket.on("disconnect", () => {
+  console.log("Disconnected from server");
+});

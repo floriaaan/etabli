@@ -49,7 +49,8 @@ async function autosaver(players: Player[], world: World) {
         : "An error occured with autosave",
       {
         textColor: "red",
-        level: "ERROR",
+        level: "FAIL",
+        type: "crash",
       }
     );
   }

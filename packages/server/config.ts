@@ -32,5 +32,14 @@ export const server = {
       chat: true,
     },
   },
+  log: {
+    enabled: true,
+    pathDir: "logs",
+    pathFiles: {
+      default: "default.log",
+      connections: "connections.log",
+      chat: "chat.log",
+      crash: "crash.log",
+    },
+  },
 };
-
