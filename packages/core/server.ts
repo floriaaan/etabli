@@ -37,7 +37,7 @@ async function server(players: Player[], world: World): Promise<Server> {
             log(`${data.name} joined the game`, {
               textColor: "yellowBright",
               date: true,
-              type: "connections"
+              type: "connections",
             });
           }
           const player = new Player(data.name);
@@ -86,12 +86,15 @@ async function server(players: Player[], world: World): Promise<Server> {
             );
             if (serverConfig.webapp.enabled)
               io.sockets.emit("webapp:players", players);
-          } else
-            log(`Someone left the game (${client.handshake.address})`, {
-              textColor: "cyan",
-              date: true,
-              type: "connections",
-            });
+          } else {
+            if (serverConfig.console.log.anonymousConnections) {
+              log(`Someone left the game (${client.handshake.address})`, {
+                textColor: "cyan",
+                date: true,
+                type: "connections",
+              });
+            }
+          }
         });
 
         if (serverConfig.webapp.enabled) {

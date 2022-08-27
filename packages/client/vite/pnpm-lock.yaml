@@ -1,6 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@tauri-apps/api': ^1.0.2
   '@tauri-apps/cli': ^1.0.5
   '@types/node': ^18.7.13
   '@types/react': ^18.0.17
@@ -13,15 +14,20 @@ specifiers:
   react-dom: ^18.2.0
   socket.io-client: ^4.5.1
   tailwindcss: ^3.1.8
+  three: ^0.143.0
   typescript: ^4.6.4
   vite: ^3.0.7
   vite-plugin-tauri: ^2.2.0
+  voxel-engine: ^0.20.2
 
 dependencies:
+  '@tauri-apps/api': 1.0.2
   msgpackr: 1.7.0-alpha3
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
   socket.io-client: 4.5.1
+  three: 0.143.0
+  voxel-engine: 0.20.2
 
 devDependencies:
   '@tauri-apps/cli': 1.0.5
@@ -425,6 +431,11 @@ packages:
     resolution: {integrity: sha512-+9jVqKhRSpsc591z5vX+X5Yyw+he/HCB4iQ/RYxw35CEPaY1gnsNE43nf9n9AaYjAQrTiI/mOwKUKdUs9vf7Xg==}
     dev: false
 
+  /@tauri-apps/api/1.0.2:
+    resolution: {integrity: sha512-yuNW0oeJ1/ZA7wNF1KgxhHrSu5viPVzY/UgUczzN5ptLM8dH15Juy5rEGkoHfeXGju90Y/l22hi3BtIrp/za+w==}
+    engines: {node: '>= 12.22.0', npm: '>= 6.6.0', yarn: '>= 1.19.1'}
+    dev: false
+
   /@tauri-apps/cli-darwin-arm64/1.0.5:
     resolution: {integrity: sha512-oxpFb9ZeMiC3xPUJ9NsXWCnnwFSVkPbJUvDKpc9IaoDIUpsMTV72W4P0Nh0uQRbyhx4modPpstt7+ONypNVYNg==}
     engines: {node: '>= 10'}
@@ -566,6 +577,12 @@ packages:
       - supports-color
     dev: true
 
+  /aabb-3d/0.0.0:
+    resolution: {integrity: sha512-rE4om/qrYm3B/esKpiGA5lCeshmyJwnmYp/rIurxItyVJHgm/Bs1JFsWsHH4XI/QZLx7YuEfe15XnYtVkzBOIQ==}
+    dependencies:
+      gl-matrix: 2.0.0
+    dev: false
+
   /acorn-node/1.8.2:
     resolution: {integrity: sha512-8mt+fslDufLYntIoPAaIMUe/lrbrehIiwmR3t2k9LljIzoigEPF27eLk2hy8zSGzmR/ogr7zbRKINMo1u0yh5A==}
     dependencies:
@@ -603,6 +620,11 @@ packages:
   /arg/5.0.2:
     resolution: {integrity: sha512-PYjyFOLKQ9y57JvQ6QLo8dAgNqswh8M1RMJYdQduT6xbWSgK36P/Z/v+p888pM69jMMfS8Xd8F6I1kQ/I9HUGg==}
     dev: true
+
+  /atlaspack/0.2.7:
+    resolution: {integrity: sha512-2f69tOVjM5ukAWa/QfRjl/Xs7JtpOCFW9AMndl0FB17od6FESRbdsN1R7khY2Qbfb8ngoXgrRKf01VVLtia1FA==}
+    engines: {node: '>= 0.8.0'}
+    dev: false
 
   /autoprefixer/10.4.8_postcss@8.4.16:
     resolution: {integrity: sha512-75Jr6Q/XpTqEf6D2ltS5uMewJIx5irCU1oBYJrWjFenq/m12WRRrz6g15L1EIoYvPLXTbEry7rDOwrcYNj77xw==}
@@ -676,6 +698,10 @@ packages:
       fsevents: 2.3.2
     dev: true
 
+  /collide-3d-tilemap/0.0.1:
+    resolution: {integrity: sha512-Sf/B6Pu3FWXLC3r30X1LvJnmLnsOaSW6GzTQJ1ptmwgm/HJhPi8cHQVqP2oSDv6nZyfCHb7WnfYxg6JFYCq0nQ==}
+    dev: false
+
   /color-convert/1.9.3:
     resolution: {integrity: sha512-QfAUtd+vFdAtFQcC8CCyYt1fYWxSqAiK2cSD6zDB8N3cpsEBAvRxp9zOGg6G/SHHJYAT88/az/IuDGALsNVbGg==}
     dependencies:
@@ -738,6 +764,25 @@ packages:
   /dlv/1.1.3:
     resolution: {integrity: sha512-+HlytyjlPKnIG8XuRG8WvmBP8xs8P71y+SKKS6ZXWoEgLuePxtDoUEiH7WkdePWrQ5JBpE6aoVqfZfJUQkjXwA==}
     dev: true
+
+  /domnode-dom/0.0.4:
+    resolution: {integrity: sha512-LY+BiHFBH0Xh9lplT/I2Jp+HP85ixk00j8Q+xGgFPk2xRrTp5BCC8VnFM0oKuklQFzUal34fARHSRmilxYwSNQ==}
+    dependencies:
+      domnode: 0.0.3
+    dev: false
+
+  /domnode/0.0.3:
+    resolution: {integrity: sha512-Axc62VjE0gf5EP5f1PlbsvdN4+xGmg57OYJmr2CpmiFIu07SWUJnA1XzwZ1ryxFxtDMCmtxG/I7JVBbHjo1mLQ==}
+    dependencies:
+      mustache: 0.4.0
+    dev: false
+
+  /drag-stream/0.0.2:
+    resolution: {integrity: sha512-Ml5XPo82HQHYw+ZnhBtbOgh9nGuC4ChrmK/o61WqRxntRV3HMpWJ46sz2THjbkuWCtJE+FdNnC5cSmvvPrOR0w==}
+    dependencies:
+      domnode-dom: 0.0.4
+      through: 1.1.2
+    dev: false
 
   /electron-to-chromium/1.4.232:
     resolution: {integrity: sha512-nd+FW8xHjM+PxNWG44nKnwHaBDdVpJUZuI2sS2JJPt/QpdombnmoCRWEEQNnzaktdIQhsNWdD+dlqxwO8Bn99g==}
@@ -981,6 +1026,10 @@ packages:
     engines: {node: '>=0.8.0'}
     dev: true
 
+  /ever/0.0.3:
+    resolution: {integrity: sha512-1HPmX13tnu47ivAWIrBoRudYXo6/aTwi2TrrKzP25vmVhlzbrpNpJnq+VSKHB/2s7cXcUqe+Rsx7QAtQdImxcw==}
+    dev: false
+
   /fast-glob/3.2.11:
     resolution: {integrity: sha512-xrO3+1bxSo3ZVHAnqzyuewYT6aMFHRAd4Kcs92MAonjwQZLsK9d0SF1IyQ3k5PoirxTW0Oe/RqFgMQ6TcNE5Ew==}
     engines: {node: '>=8.6.0'}
@@ -1017,6 +1066,10 @@ packages:
     dev: true
     optional: true
 
+  /fullscreen/0.0.1:
+    resolution: {integrity: sha512-reSW+p0jF2ZtUS0pcS+RT4oyAFceCurRbTuVGBimGs3oNM6+MSUF5I9H7lUWlb82e696Mnu+QPbwTPeTUU+3yg==}
+    dev: false
+
   /function-bind/1.1.1:
     resolution: {integrity: sha512-yIovAzMX49sF8Yl58fSCWJ5svSLuaibPxXQJFLmBObTuCr0Mf1KiPopGM9NiFjiYBCbfaa2Fh6breQ6ANVTI0A==}
     dev: true
@@ -1025,6 +1078,10 @@ packages:
     resolution: {integrity: sha512-3hN7NaskYvMDLQY55gnW3NQ+mesEAepTqlg+VEbj7zzqEMBVNhzcGYYeqFo/TlYz6eQiFcp1HcsCZO+nGgS8zg==}
     engines: {node: '>=6.9.0'}
     dev: true
+
+  /gl-matrix/2.0.0:
+    resolution: {integrity: sha512-SOBDuMUHJfd52iy2/5+0YOY245Mfc7zmXVPmh0fTy22hmWFxZqXtWdA80bbr1Pbsvf59jnnn3Hg+mywXJjiDEg==}
+    dev: false
 
   /glob-parent/5.1.2:
     resolution: {integrity: sha512-AOIgSQCepiJYwP3ARnGx+5VnTu2HBYdzbGP45eLw1vr3zB3vZLeyed1sC9hnbcOc9/SrMyM5RPQrkGz4aS9Zow==}
@@ -1056,6 +1113,18 @@ packages:
     dependencies:
       function-bind: 1.1.1
     dev: true
+
+  /inherits/1.0.0:
+    resolution: {integrity: sha512-5KfXESjCAfFQel2TLqhr18NEz++UiWVIA0jwHzs2Kbvb3e+r+G/eVhRfoZbaPCL0PnERvK5YeMgh02O4eenufw==}
+    dev: false
+
+  /interact/0.0.2:
+    resolution: {integrity: sha512-A4aLkKJbogFhb6CBz7qn3CIn9Ru4hOOLzwTGA0nRaHxO4uyPiMFBkMPPuBgh1bWtwESeURgRDgYUUbyoQrq1/A==}
+    dependencies:
+      drag-stream: 0.0.2
+      fullscreen: 0.0.1
+      pointer-lock: 0.0.3
+    dev: false
 
   /is-binary-path/2.1.0:
     resolution: {integrity: sha512-ZMERYes6pDydyuGidse7OsHxtbI7WVeUEozgR/g7rd0xUimYNlvZRE/K2MgZTjWy725IfelLeVcEM97mmtRGXw==}
@@ -1101,6 +1170,13 @@ packages:
     engines: {node: '>=6'}
     hasBin: true
     dev: true
+
+  /kb-controls/0.0.2:
+    resolution: {integrity: sha512-SDTpgHaMeEo705dwT4z+0F8Us4sMVj7fDAiPD9C1QbP6T14RvvHQCorxiTvjCuvsCvZ4QnSgaWNzW8OH0zuciQ==}
+    dependencies:
+      ever: 0.0.3
+      vkey: 1.0.1
+    dev: false
 
   /kolorist/1.5.1:
     resolution: {integrity: sha512-lxpCM3HTvquGxKGzHeknB/sUjuVoUElLlfYnXZT73K8geR9jQbroGlSCFBax9/0mpGoD3kzcMLnOlGQPJJNyqQ==}
@@ -1167,6 +1243,10 @@ packages:
       msgpackr-extract: 2.1.2
     dev: false
 
+  /mustache/0.4.0:
+    resolution: {integrity: sha512-lOIx6XdcDjwR2JApJUO4LuQ7rN2oT41NSphYEBqFKZOa/M+mRKnHZgpa6wbCEFQ1GE0iNZLh7UV3xXc1+8Z+YQ==}
+    dev: false
+
   /nanoid/3.3.4:
     resolution: {integrity: sha512-MqBkQh/OHTS2egovRtLk45wEyNXwF+cokD+1YPf9u5VfJiRdAiRwB2froX5Co9Rh20xs4siNPm8naNotSD6RBw==}
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
@@ -1215,6 +1295,14 @@ packages:
     resolution: {integrity: sha512-udgsAY+fTnvv7kI7aaxbqwWNb0AHiB0qBO89PZKPkoTmGOgdbrHDKD+0B2X4uTfJ/FT1R09r9gTsjUjNJotuog==}
     engines: {node: '>=0.10.0'}
     dev: true
+
+  /pin-it/0.0.1:
+    resolution: {integrity: sha512-2M/Whkh+aSXC8pyZHZfb/n7kkEEyTccYWi3bWCUr0cmsKN6CzYMX6qW33fwpZ2ERMyNC1h5QOBW4n5qOZLuzpA==}
+    dev: false
+
+  /pointer-lock/0.0.3:
+    resolution: {integrity: sha512-NUwOCdMRoeZxIzbwHQFQtOG0rceVZoFEQpkg0SaJ3dCzgOT6v92BNYoUsopqhjIdw+ufV65QHGLwOsWbnKmUsw==}
+    dev: false
 
   /postcss-import/14.1.0_postcss@8.4.16:
     resolution: {integrity: sha512-flwI+Vgm4SElObFVPpTIT7SU7R3qk2L7PyduMcokiaVKuWv9d/U+Gm/QAd8NDLuykTWTkcrjOeD2Pp1rMeBTGw==}
@@ -1294,6 +1382,10 @@ packages:
     resolution: {integrity: sha512-WuyALRjWPDGtt/wzJiadO5AXY+8hZ80hVpe6MyivgraREW751X3SbhRvG3eLKOYN+8VEvqLcf3wdnt44Z4S4SA==}
     engines: {node: '>=10'}
     dev: true
+
+  /raf/0.0.1:
+    resolution: {integrity: sha512-0KaTd35x733A9x1TP4h2wGvzv0WcWWXHOMPj26T/l+mlg6IRHroymai8FxeOjBqx5TIL1m0T7z3lu3iChCsysg==}
+    dev: false
 
   /react-dom/18.2.0_react@18.2.0:
     resolution: {integrity: sha512-6IMTriUmvsjHUjNtEDudZfuDQUoWXVxKHhlEGSk81n4YFS+r/Kl99wXiwlVXtPBtJenozv2P+hxDsw9eA7Xo6g==}
@@ -1406,6 +1498,16 @@ packages:
     resolution: {integrity: sha512-9NykojV5Uih4lgo5So5dtw+f0JgJX30KCNI8gwhz2J9A15wD0Ml6tjHKwf6fTSa6fAdVBdZeNOs9eJ71qCk8vA==}
     dev: true
 
+  /spatial-events/0.0.1:
+    resolution: {integrity: sha512-Si3q57GprIVyH1gspcGaaxh5yfBlH3CvA1LguDA66U7kecu79sZAHc7rRirqvPTqoQnX9q+s4dE5cbz0uY4a8w==}
+    dependencies:
+      aabb-3d: 0.0.0
+    dev: false
+
+  /spatial-trigger/0.0.0:
+    resolution: {integrity: sha512-pgCQ0+U2EA2FLeYDtWsWSRPF0j2+bF6i3DWo8CwncXH4LZBWBPFEPQNqMePqnKmA/+j8/0mB3A5aS4UwC16qmw==}
+    dev: false
+
   /supports-color/5.5.0:
     resolution: {integrity: sha512-QjVjwdXIt408MIiAqCX4oUKsgU2EqAGzs2Ppkm4aQYbjm+ZEWEcW4SfFNTr4uMNZma0ey4f5lgLrkB0aX0QMow==}
     engines: {node: '>=4'}
@@ -1448,6 +1550,23 @@ packages:
     transitivePeerDependencies:
       - ts-node
     dev: true
+
+  /three/0.143.0:
+    resolution: {integrity: sha512-oKcAGYHhJ46TGEuHjodo2n6TY2R6lbvrkp+feKZxqsUL/WkH7GKKaeu6RHeyb2Xjfk2dPLRKLsOP0KM2VgT8Zg==}
+    dev: false
+
+  /three/0.56.0:
+    resolution: {integrity: sha512-Vx0qq51yx3fhKpLVmV0EsnQ711UXmr187dzRkUYRbq+hKhA2ksOfj+15r+x6OWLbXyOJm8SCo8fsI1ZplDZJPQ==}
+    dev: false
+
+  /through/1.1.2:
+    resolution: {integrity: sha512-YG7jdC/XCqsooOdR2LJpeuQ5WnuYnHohUMJq4xMN09rbr81rli6JfZbGa07dWJg24qb8h6mGC+0G74eak9hrnw==}
+    dev: false
+
+  /tic/0.2.1:
+    resolution: {integrity: sha512-dF8sA2D1HbLAZSdV1gM6Yn1T5tCSYoevZKJE7BNgyhMwPGedHZmS7q6dIz0299majPrb6baGZ95K/t4s10atKg==}
+    engines: {node: '>= 0.8.0'}
+    dev: false
 
   /to-fast-properties/2.0.0:
     resolution: {integrity: sha512-/OaKK0xYrs3DmxRYqL/yDc+FxFUVYhDlXMhRmv3z915w2HF1tnN1omB354j8VUGO/hbRzyD6Y3sA7v7GS/ceog==}
@@ -1522,6 +1641,85 @@ packages:
     optionalDependencies:
       fsevents: 2.3.2
     dev: true
+
+  /vkey/1.0.1:
+    resolution: {integrity: sha512-qmeIeB6Y66RzUA1NTi353bu+AhSeQ9/vcFuLLayrz6whAczm1QfOqcw5kCkG0jLOfmgcZeCMHLuUhuWExz9EJA==}
+    dev: false
+
+  /voxel-control/0.0.7:
+    resolution: {integrity: sha512-eFxgHQ53nWtUAMVV9ZcLxkf8yo2QRCNFjAspPGmSgGKpx50W7+kbv4/Q9BscIfnjPJoKq6dkfncXLOv+nUZ38Q==}
+    dev: false
+
+  /voxel-engine/0.20.2:
+    resolution: {integrity: sha512-qRHEkiiKFkOJEY6C+F+2hoqKT6bLrM72Ka45BFy/lga+KzmcRyIq2Zmn3edx1uH7GPu3EHiAeqXEp8AaJHRrvA==}
+    dependencies:
+      aabb-3d: 0.0.0
+      collide-3d-tilemap: 0.0.1
+      gl-matrix: 2.0.0
+      inherits: 1.0.0
+      interact: 0.0.2
+      kb-controls: 0.0.2
+      pin-it: 0.0.1
+      raf: 0.0.1
+      spatial-events: 0.0.1
+      spatial-trigger: 0.0.0
+      three: 0.56.0
+      tic: 0.2.1
+      voxel: 0.3.1_voxel-engine@0.20.2
+      voxel-control: 0.0.7
+      voxel-mesh: 0.2.1_three@0.56.0
+      voxel-physical: 0.0.10
+      voxel-raycast: 0.2.1
+      voxel-region-change: 0.1.0
+      voxel-texture: 0.5.6
+      voxel-view: 0.0.6
+    dev: false
+
+  /voxel-mesh/0.2.1_three@0.56.0:
+    resolution: {integrity: sha512-JGSdPEM3oE/zIIZqAflji8dv2ZPNl7QSmUrTgSMKm6StaeVVURa8yCktetyDmtB1r3SwVKd/rI7+XAJYt0/Wew==}
+    peerDependencies:
+      three: '*'
+    dependencies:
+      three: 0.56.0
+    dev: false
+
+  /voxel-physical/0.0.10:
+    resolution: {integrity: sha512-LJvyxvpFAcF1vmsqU3egBYzQs7fN5jPykhTM/vRe7YLjOgMc8QTSXCShYzdZNt30w3th+UD6vfkl5ZMkbDhcoQ==}
+    dependencies:
+      aabb-3d: 0.0.0
+      three: 0.143.0
+    dev: false
+
+  /voxel-raycast/0.2.1:
+    resolution: {integrity: sha512-rJwTCkKnA/5Nxt9oB7qpE4gcIYJvEDPyVXFt0WcZCAt60C5nvvMTLv3iKTgy1v0CQiR3k6mPIWKGmaTQyV/07w==}
+    dev: false
+
+  /voxel-region-change/0.1.0:
+    resolution: {integrity: sha512-H841j/EinfE4r1RY+Ex6YtDgb/Bx20TTmYqeVRNXo2TPRTDSm3skDmq1/jLphO/qzH3ZaZpsf/KiyIgaHZ3l7A==}
+    dependencies:
+      aabb-3d: 0.0.0
+    dev: false
+
+  /voxel-texture/0.5.6:
+    resolution: {integrity: sha512-bMHM8eLyyPRR7sqMn96z3aUyCLnYTq9EPzaabEcbo3YADkGCJuWq/IcB29aLMEUvl5nrVeCfJlL8KOQHSLXADg==}
+    engines: {node: '>= 0.8.0'}
+    dependencies:
+      atlaspack: 0.2.7
+      tic: 0.2.1
+    dev: false
+
+  /voxel-view/0.0.6:
+    resolution: {integrity: sha512-diOK93EwSZ8pO7xrCRBtA8wy1Zaq93TaUfR1fEF+lipceaiRETGEAC+c6nZm09FBPQwp+6cNgWbYaMTlVOI1Nw==}
+    dev: false
+
+  /voxel/0.3.1_voxel-engine@0.20.2:
+    resolution: {integrity: sha512-RMcnRo91/dDAU6LCI2A6rV/Vf0SStR5j4K3ZHJBthG3FvFD3iS/GOPGgHVCL3yBjTop8O9HZn4zP0jDkxgK6yg==}
+    peerDependencies:
+      voxel-engine: '>=0.9.0'
+    dependencies:
+      inherits: 1.0.0
+      voxel-engine: 0.20.2
+    dev: false
 
   /ws/8.2.3:
     resolution: {integrity: sha512-wBuoj1BDpC6ZQ1B7DWQBYVLphPWkm8i9Y0/3YdHjHKHiohOJ1ws+3OccDWtH+PoC9DZD5WOTrJvNbWvjS6JWaA==}

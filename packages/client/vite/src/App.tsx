@@ -1,3 +1,4 @@
+import { GameEngine } from "./components/GameEngine";
 import { Login } from "./components/Helpers/Login";
 import { PlayerHUD } from "./components/PlayerHUD";
 import { useGameContext } from "./hooks/useGameContext";
@@ -12,6 +13,7 @@ function App() {
       {player && connected ? (
         <>
           <PlayerHUD />
+          <GameEngine />
         </>
       ) : (
         <Login />

@@ -28,6 +28,7 @@ export const server = {
   webapp: { enabled: false, port: 8080 },
   console: {
     log: {
+      anonymousConnections: false,
       connections: true,
       chat: true,
     },
