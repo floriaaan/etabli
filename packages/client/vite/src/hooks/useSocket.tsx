@@ -33,6 +33,7 @@ export const SocketProvider = ({ children }: { children: ReactNode }) => {
     });
 
     return () => {
+      socket.disconnect();
       socket.off("connect");
       socket.off("disconnect");
     };

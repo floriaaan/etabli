@@ -11,7 +11,11 @@ export async function initServer() {
   ) => Promise<BootstrapApp>;
 
   bootstrap(players)
-    .then(async (app: BootstrapApp) => {})
+    .then(async (app: BootstrapApp) => {
+      app.server.on("connection", (socket) => {
+        socket.emit("mods", app.mods);
+      });
+    })
     .catch((e: Error) => {
       log(
         e instanceof Error

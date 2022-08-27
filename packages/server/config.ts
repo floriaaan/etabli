@@ -17,7 +17,7 @@ export const modloader = {
   path: "mods",
   console: {
     log: {
-      loading: false,
+      loading: true,
     },
   },
 };

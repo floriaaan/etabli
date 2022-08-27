@@ -8,6 +8,7 @@ import {
 import { useSocket } from "./useSocket";
 
 import { unpack } from "msgpackr";
+import { message } from "@tauri-apps/api/dialog";
 
 const GameContext = createContext({});
 export const GameProvider = ({ children }: { children: ReactNode }) => {
@@ -16,7 +17,26 @@ export const GameProvider = ({ children }: { children: ReactNode }) => {
   const [players, setPlayers] = useState<any[]>([]);
   const [world, setWorld] = useState<any>(undefined);
 
+  const [mods, setMods] = useState<any[]>([]);
+
   useEffect(() => {
+    socket?.on("mods", async (data: any[]) => {
+      if (!data.every((mod) => mods.includes(mod))) {
+        // @ts-ignore
+        if (window.__TAURI__) {
+          await message(
+            "You might encountered issues, and you will no longer be able to play from 1.0.0",
+            { title: "Mods mismatch", type: "warning" }
+          );
+        } else {
+          alert(
+            "Mods mismatch - You might encountered issues, and you will no longer be able to play from 1.0.0"
+          );
+        }
+
+        console.log("Mods mismatch", "Got:", mods, "Received:", data);
+      }
+    });
     if (socket && connected) {
       socket.on("player_joined", (data: any) => {
         let buffer = new Uint8Array(data);
