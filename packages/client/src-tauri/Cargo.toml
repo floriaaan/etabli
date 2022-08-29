@@ -1,11 +1,11 @@
 [package]
-name = "app"
+name = "etabli-client"
 version = "0.1.0"
-description = "A Tauri App"
-authors = ["you"]
-license = ""
-repository = ""
-default-run = "app"
+description = "Minecraft clone written in TypeScript"
+authors = ["floriaaan"]
+license = "MIT"
+repository = "https://github.com/floriaaan/etabli"
+default-run = "etabli-client"
 edition = "2021"
 rust-version = "1.57"
 
