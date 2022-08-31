@@ -1,4 +1,5 @@
 import { GameEngine } from "./components/GameEngine";
+import { KeyboardListener } from "./components/Helpers/KeyboardListener";
 import { Login } from "./components/Helpers/Login";
 import { PlayerHUD } from "./components/PlayerHUD";
 import { useGameContext } from "./hooks/useGameContext";
@@ -14,6 +15,7 @@ function App() {
         <>
           <PlayerHUD />
           <GameEngine />
+          <KeyboardListener />
         </>
       ) : (
         <Login />

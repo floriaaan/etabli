@@ -51,6 +51,12 @@ async function server(players: Player[], world: World): Promise<Server> {
             players.map((p) => p.toCompressed())
           );
 
+          io.sockets.emit("chat_message", {
+            message: `${data.name} joined the game`,
+            type: "system",
+            
+          })
+
           if (serverConfig.webapp.enabled)
             io.sockets.emit("webapp:players", players);
         });
@@ -65,7 +71,7 @@ async function server(players: Player[], world: World): Promise<Server> {
             (p) => p.socketId === client.id
           )?.name;
           log(`${playerName}: ${message}`, { date: true, type: "chat" });
-          io.sockets.emit("chat_message", { playerName, message });
+          io.sockets.emit("chat_message", { playerName, message, type: "chat" });
         });
 
         client.on("disconnect", () => {
