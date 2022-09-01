@@ -33,7 +33,7 @@ export const MainTitle = () => {
           <button
             disabled
             className={classNames(
-              "px-3 py-1.5 rounded-lg text-gray-700 bg-gray-200 hover:bg-gray-300 duration-150 disabled:opacity-50",
+              "px-3 py-1.5 rounded-lg text-neutral-700 bg-neutral-200 hover:bg-neutral-300 duration-150 disabled:opacity-50",
               {
                 "col-span-2": !window.__TAURI__,
               }

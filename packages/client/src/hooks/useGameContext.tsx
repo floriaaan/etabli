@@ -11,7 +11,7 @@ import { unpack } from "msgpackr";
 import { message } from "@tauri-apps/api/dialog";
 
 
-type ChatMessage = {
+export type ChatMessage = {
   message: string;
   playerName?: string;
   type: "chat" | "system";

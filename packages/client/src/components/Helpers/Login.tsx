@@ -30,7 +30,7 @@ export const Login = () => {
               type="text"
               id="playerName"
               placeholder="floriaaan"
-              className="px-3 py-1.5 rounded-lg grow bg-gray-100 hover:bg-gray-200 active:bg-gray-300 duration-150"
+              className="px-3 py-1.5 rounded-lg grow bg-neutral-100 hover:bg-neutral-200 active:bg-neutral-300 duration-150"
               onChange={(e) => setPlayerName(e.target.value)}
             />
             <button
@@ -44,7 +44,7 @@ export const Login = () => {
             type="button"
             onClick={() => disconnect()}
             className={classNames(
-              "px-3 py-1.5 rounded-lg text-white bg-gray-500 hover:bg-gray-700 duration-150",
+              "px-3 py-1.5 rounded-lg text-white bg-neutral-500 hover:bg-neutral-700 duration-150",
               { "col-span-2": !window.__TAURI__ }
             )}
           >

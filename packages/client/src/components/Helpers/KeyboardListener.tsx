@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { defaultKeybinds, Keybind } from "../../constants/defaultKeybinds";
-import { useGameContext } from "../../hooks/useGameContext";
 import { useSocket } from "../../hooks/useSocket";
+import { ChatGUI } from "../Chat/GUI";
+import { InventoryGUI } from "../Inventory/GUI";
 
 export const KeyboardListener = () => {
   const [component, setComponent] = useState<JSX.Element>(<></>);
@@ -36,12 +37,10 @@ export const HandleKeyDown = ({
 }): JSX.Element => {
   const { socket } = useSocket();
   const keybind = getAssignedKey(event.code);
-  const [message, setMessage] = useState<string>("");
-  const [isChatOpen, setIsChatOpen] = useState<boolean>(false);
   const [component, setComponent] = useState<JSX.Element>(<></>);
-  const inputRef = useRef<HTMLInputElement>(null);
 
-  const { chat, player } = useGameContext();
+  const [isChatOpen, setIsChatOpen] = useState<boolean>(false);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     (async () => {
@@ -61,47 +60,14 @@ export const HandleKeyDown = ({
         switch (keybind?.action) {
           case "open_chat":
             setIsChatOpen(true);
-            setComponent(
-              <div className="absolute h-screen w-screen bg-gray-800 bg-opacity-40 top-0 left-0 flex flex-col justify-end p-2 gap-2">
-                <div className="flex flex-col gap-1 p-2 bg-gray-800 rounded-md min-h-[32px]">
-                  {chat.map((message, index) =>
-                    message.type === "chat" ? (
-                      <div
-                        key={index}
-                        className="inline-flex items-center gap-1"
-                      >
-                        <span className="text-blue-500 text-sm font-bold">
-                          {message.playerName}
-                        </span>
-                        <span className="text-gray-200 text-xs">
-                          {message.message}
-                        </span>
-                      </div>
-                    ) : (
-                      <div
-                        key={index}
-                        className="inline-flex items-center gap-1"
-                      >
-                        <span className="text-amber-500 text-sm font-bold">
-                          {message.message}
-                        </span>
-                      </div>
-                    )
-                  )}
-                </div>
-                <input
-                  autoFocus
-                  className="bg-gray-800 text-white rounded-md px-2 py-1"
-                  type="text"
-                  ref={inputRef}
-                />
-              </div>
-            );
+            setComponent(<ChatGUI inputRef={inputRef} />);
             break;
           case "open_inventory":
             console.log("open_inventory");
+            setComponent(<InventoryGUI />);
             break;
           default:
+            if (event.code === "Escape") setComponent(<></>);
             console.log("default", event.code);
             break;
         }
