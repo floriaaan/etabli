@@ -13,7 +13,7 @@ export const saves = {
 };
 
 export const modloader = {
-  enabled: true,
+  enabled: false,
   path: "mods",
   console: {
     log: {

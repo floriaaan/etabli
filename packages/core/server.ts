@@ -6,6 +6,7 @@ import { server as serverConfig } from "@etabli/config";
 import { Server } from "socket.io";
 import { portInUse } from "@etabli/utils/server/portInUse";
 import { World } from "@etabli/classes/world/World";
+import { savePlayer } from "./saver";
 
 const clog = console.log;
 
@@ -54,8 +55,7 @@ async function server(players: Player[], world: World): Promise<Server> {
           io.sockets.emit("chat_message", {
             message: `${data.name} joined the game`,
             type: "system",
-            
-          })
+          });
 
           if (serverConfig.webapp.enabled)
             io.sockets.emit("webapp:players", players);
@@ -67,11 +67,63 @@ async function server(players: Player[], world: World): Promise<Server> {
         // });
 
         client.on("chat_message", (message) => {
-          const playerName = players.find(
+          const player = players.find(
             (p) => p.socketId === client.id
-          )?.name;
-          log(`${playerName}: ${message}`, { date: true, type: "chat" });
-          io.sockets.emit("chat_message", { playerName, message, type: "chat" });
+          );
+
+          // commands
+          if (message.startsWith("/")) {
+            const args = message.split(" ");
+            const command = args.shift()?.slice(1);
+            if (command === "help") {
+              client.emit("chat_message", {
+                message: "Available commands: /help, /players",
+                type: "system",
+              });
+            } else if (command === "players") {
+              client.emit("chat_message", {
+                message: `Players online: ${players.length}`,
+                type: "system",
+              });
+            } else if (command === "give") {
+              const playerName = args[0]
+              const item = args[1];
+              const amount = parseInt(args[2]);
+              const player = players.find((p) => p.name === playerName);
+              if (player) {
+                // player.inventory.add(item, amount); FIXME
+                const index = players.findIndex((p) => p.name === playerName);
+                players[index] = player;
+
+                client.emit(
+                  "player_inventory_update",
+                  player.toCompressed()
+                );
+
+                io.sockets.emit("chat_message", {
+                  message: `Give ${playerName} ${amount} ${item}`,
+                  type: "system",
+                });
+              } else {
+                client.emit("chat_message", {
+                  message: `Player not found`,
+                  type: "system",
+                });
+              }
+            } else {
+              client.emit("chat_message", {
+                message: `Unknown command: ${command}`,
+                type: "system",
+              });
+            }
+          }
+
+          log(`${player.name}: ${message}`, { date: true, type: "chat" });
+          io.sockets.emit("chat_message", {
+            playerName: player.name,
+            message,
+            type: "chat",
+          });
         });
 
         client.on("disconnect", () => {

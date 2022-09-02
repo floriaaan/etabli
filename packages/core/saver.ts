@@ -1,6 +1,7 @@
 import { Player } from "@etabli/classes/entities/Player";
 import { isDir } from "@etabli/utils/filesystem/isDir";
-import { mkdir, writeFile } from "fs/promises";
+import { mkdir, readFile, writeFile } from "fs/promises";
+import { v5 as uuid } from "uuid";
 
 import { log } from "@etabli/utils/console/log";
 import { saves } from "@etabli/config";
@@ -23,6 +24,22 @@ export const savePlayer = async (player: Player) => {
     player,
   };
   await writeFile(savePath, JSON.stringify(saveData));
+};
+
+export const getPlayerSave = async (playerName: string) => {
+  const fileName = uuid(
+    `player:${playerName}`,
+    "630eb68f-e0fa-5ecc-887a-7c7a62614681"
+  );
+
+  const savePath = `${SAVES_DIR}/${WORLD_DIR}/players/${fileName}.json`;
+  try {
+    const saveData = JSON.parse(await readFile(savePath, "utf-8"));
+    return saveData;
+  } catch (e) {
+    console.error(e)
+    return null;
+  }
 };
 
 const clog = console.log;

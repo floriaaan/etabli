@@ -27,6 +27,7 @@ export const GameProvider = ({ children }: { children: ReactNode }) => {
   const [chat, setChat] = useState<ChatMessage[]>([]);
 
   const [mods, setMods] = useState<any[]>([]);
+  console.log(player)
 
   useEffect(() => {
     socket?.on("mods", async (data: any[]) => {
@@ -61,7 +62,6 @@ export const GameProvider = ({ children }: { children: ReactNode }) => {
       });
 
       socket.on("world_loading", (data: any) => {
-        console.log(data);
         let buffer = new Uint8Array(data);
         let world = unpack(buffer);
         setWorld(world);
@@ -70,6 +70,12 @@ export const GameProvider = ({ children }: { children: ReactNode }) => {
       socket.on("chat_message", (data: any) => {
         setChat((chat) => [...chat, data]);
       })
+
+      socket.on("player_inventory_update", (data: any) => {
+        let buffer = new Uint8Array(data);
+        let player = unpack(buffer);
+        setPlayer(player)
+      });
     }
 
     if (!socket || !connected) {
