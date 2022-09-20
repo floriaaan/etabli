@@ -1,6 +1,6 @@
 <div id="top"></div>
 
-<p class="not-prose inline-flex items-center gap-x-2 mx-auto" align="center">
+<p class="not-prose inline-flex items-center gap-x-2 w-full justify-center" align="center">
   <a href="https://github.com/floriaaan/etabli/graphs/contributors"><img src="https://img.shields.io/github/contributors/floriaaan/etabli.svg" alt="Contributors"></a>
   <a href="https://github.com/floriaaan/etabli/network/members"><img src="https://img.shields.io/github/forks/floriaaan/etabli.svg" alt="Forks"></a>
   <a href="https://github.com/floriaaan/etabli/stargazers"><img src="https://img.shields.io/github/stars/floriaaan/etabli.svg" alt="Stargazers"></a>
