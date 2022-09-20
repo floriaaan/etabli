@@ -1,12 +1,14 @@
 <div id="top"></div>
 
+<p class="not-prose inline-flex items-center">
+  <a href="https://github.com/floriaaan/etabli/graphs/contributors"><img src="https://img.shields.io/github/contributors/floriaaan/etabli.svg" alt="Contributors"></a>
+  <a href="https://github.com/floriaaan/etabli/network/members"><img src="https://img.shields.io/github/forks/floriaaan/etabli.svg" alt="Forks"></a>
+  <a href="https://github.com/floriaaan/etabli/stargazers"><img src="https://img.shields.io/github/stars/floriaaan/etabli.svg" alt="Stargazers"></a>
+  <a href="https://github.com/floriaaan/etabli/issues"><img src="https://img.shields.io/github/issues/floriaaan/etabli.svg" alt="Issues"></a>
+  <a href="https://github.com/floriaaan/etabli/blob/master/LICENSE"><img src="https://img.shields.io/github/license/floriaaan/etabli.svg" alt="MIT License"></a>
+  <a href="https://github.com/floriaaan/etabli/"><img src="https://codecov.io/gh/floriaaan/etabli/branch/develop/graph/badge.svg?token=140LKRPY5O" alt="Code coverage"></a>
 
-[![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
-[![MIT License][license-shield]][license-url]
-[![Code coverage][coverage-shield]][coverage-url]
+</p>
 
 <!-- PROJECT LOGO -->
 <br />
