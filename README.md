@@ -1,8 +1,5 @@
 <div id="top"></div>
 
-<script>alert("test")</script>
-
-<div style="display:inline-flex;">
 
 [![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
@@ -10,8 +7,6 @@
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
 [![Code coverage][coverage-shield]][coverage-url]
-
-</div>
 
 <!-- PROJECT LOGO -->
 <br />
