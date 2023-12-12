@@ -16,21 +16,26 @@ const installModules = async (path: string) => {
   const modName = path.split("/").pop();
   try {
     // Change directory to the mod directory
-    process.chdir(path);
-    log(`[${modName}]\tInstalling modules...`, { level: "DEBUG" });
+    process.chdir(baseDir); // Change directory back to the root directory to log the command
+    log(`(${modName})\tInstalling modules...`, { level: "DEBUG" });
 
+    process.chdir(path);
     const packageManager = await getPackageManager(path);
     const command = `${packageManager} install`;
-    log(`[${modName}]\tRunning ${command}...`, { level: "DEBUG" });
+
+    process.chdir(baseDir); // Change directory back to the root directory to log the command
+    log(`(${modName})\tRunning ${command}...`, { level: "DEBUG" });
 
     // Run install command
+    process.chdir(path); // Change directory back to the mod directory to run the command
     const { stdout, stderr } = await exec(command);
 
     // Handle the output of the command
+    process.chdir(baseDir); // Change directory back to the root directory to log the command
     if (stdout.trim())
-      log(stdout.replace(/\n/g, `\n[${modName}]\t`), { level: "DEBUG" });
+      log(stdout.replace(/\n/g, `\n(${modName})\t`), { level: "DEBUG" });
     if (stderr.trim())
-      log(stderr.replace(/\n/g, `\n[${modName}]\t`), { level: "DEBUG" });
+      log(stderr.replace(/\n/g, `\n(${modName})\t`), { level: "DEBUG" });
 
     return true;
   } catch (error) {
@@ -56,22 +61,28 @@ export const buildMod = async (path: string) => {
     await installModules(path);
 
     // Run npm run build command
+    process.chdir(path); // Change directory back to the mod directory to run the command
     const packageManager = await getPackageManager(path);
     const command = `${packageManager} run build`;
-    log(`[${modName}]\tRunning ${command}...`, { level: "DEBUG" });
 
-    log(`[${modName}]\tBuilding mod...`, { level: "DEBUG" });
+    process.chdir(baseDir); // Change directory back to the root directory to log the command
+    log(`(${modName})\tRunning ${command}...`, { level: "DEBUG" });
+    log(`(${modName})\tBuilding mod...`, { level: "DEBUG" });
+
+    process.chdir(path); // Change directory back to the mod directory to run the command
     const { stdout, stderr } = await exec(command);
 
     // Handle the output of the command
     // watchout: rollup outputs to stderr
+    process.chdir(baseDir); // Change directory back to the root directory to log the command
     if (stdout.trim())
-      log(stdout.replace(/\n/g, `\n[${modName}]\t`), { level: "DEBUG" });
+      log(stdout.replace(/\n/g, `\n(${modName})\t`), { level: "DEBUG" });
     if (stderr.trim())
-      log(stderr.replace(/\n/g, `\n[${modName}]\t`), { level: "DEBUG" });
+      log(stderr.replace(/\n/g, `\n(${modName})\t`), { level: "DEBUG" });
 
     return true;
   } catch (error) {
+    process.chdir(baseDir); // Change directory back to the root directory to log the command
     log("Error occurred during the build process: " + error.message, {
       level: "FAIL",
     });
