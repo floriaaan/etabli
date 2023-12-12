@@ -6,7 +6,6 @@ import { server as serverConfig } from "@etabli/config";
 import { Server } from "socket.io";
 import { portInUse } from "@etabli/utils/server/portInUse";
 import { World } from "@etabli/classes/world/World";
-import { savePlayer } from "./saver";
 
 const clog = console.log;
 

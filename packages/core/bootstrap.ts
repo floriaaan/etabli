@@ -1,7 +1,7 @@
 import { BootstrapApp } from "@etabli/types/Bootstrap";
 import { Player } from "@etabli/classes/entities/Player";
 import { generateWorld } from "@etabli/core/world/generation";
-import { Mod } from "@etabli/core/modloader";
+import { Mod } from "@etabli/core/mod-loader";
 import { Configuration } from "@etabli/core/configuration";
 
 async function bootstrap(players: Player[]): Promise<BootstrapApp> {
@@ -9,7 +9,7 @@ async function bootstrap(players: Player[]): Promise<BootstrapApp> {
   let world = generateWorld();
 
   const ascii = await import("@etabli/core/ascii");
-  const modloader = await import("@etabli/core/modloader");
+  const modloader = await import("@etabli/core/mod-loader");
   const server = await import("@etabli/core/server");
   const saver = await import("@etabli/core/saver");
   const datastore = await import("@etabli/core/configuration");

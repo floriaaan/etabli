@@ -5,6 +5,7 @@ import { modloader } from "@etabli/config";
 import chalk from "chalk";
 import { log } from "@etabli/utils/console/log";
 import path from "path";
+import { buildMod } from "@etabli/core/mod-builder";
 const MOD_DIR = modloader.path;
 
 export type Mod = {
@@ -29,6 +30,17 @@ const modLoader = modloader.enabled
           try {
             // @ts-ignore
 
+            // check if the mod has a dist/index.js file
+            const isModBuilt = isDir(path.resolve(MOD_DIR, modDir, "dist"));
+            if (!isModBuilt) {
+              log(
+                `Mod ${modDir} is not built. Starting build process (experimental)..`,
+                { textColor: "yellow", level: "WARN" }
+              );
+              await buildMod(path.resolve(MOD_DIR, modDir));
+            }
+
+            // import the mod if it has a dist/index.js file
             const modInit = await import(
               path.resolve(MOD_DIR, modDir, "dist", "index.js")
             );
@@ -38,8 +50,6 @@ const modLoader = modloader.enabled
             );
 
             if (modInit.default) {
-              
-
               modsLoaded.push({
                 name: modDir,
                 version: JSON.parse(modVersion.toString())?.version,

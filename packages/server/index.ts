@@ -21,11 +21,7 @@ export async function initServer() {
         e instanceof Error
           ? "An error occured with bootstrap: " + e.message
           : "An error occured with bootstrap",
-        {
-          textColor: "red",
-          level: "FAIL",
-          type: "crash",
-        }
+        { textColor: "red", level: "FAIL", type: "crash" }
       );
     });
 }
