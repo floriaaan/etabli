@@ -1,3 +1,4 @@
+import { log } from "@etabli/utils/console/log";
 import { exists } from "@etabli/utils/filesystem/exists";
 import { exec } from "@etabli/utils/process/exec";
 
@@ -16,18 +17,20 @@ const installModules = async (path: string) => {
   try {
     // Change directory to the mod directory
     process.chdir(path);
-    console.log(`[${modName}]\tInstalling modules...`);
+    log(`[${modName}]\tInstalling modules...`, { level: "DEBUG" });
 
     const packageManager = await getPackageManager(path);
     const command = `${packageManager} install`;
-    console.log(`[${modName}]\tRunning ${command}...`);
+    log(`[${modName}]\tRunning ${command}...`, { level: "DEBUG" });
 
     // Run install command
     const { stdout, stderr } = await exec(command);
 
     // Handle the output of the command
-    if (stdout.trim()) console.log(stdout.replace(/\n/g, `\n[${modName}]\t`));
-    if (stderr.trim()) console.error(stderr.replace(/\n/g, `\n[${modName}]\t`));
+    if (stdout.trim())
+      log(stdout.replace(/\n/g, `\n[${modName}]\t`), { level: "DEBUG" });
+    if (stderr.trim())
+      log(stderr.replace(/\n/g, `\n[${modName}]\t`), { level: "DEBUG" });
 
     return true;
   } catch (error) {
@@ -55,19 +58,23 @@ export const buildMod = async (path: string) => {
     // Run npm run build command
     const packageManager = await getPackageManager(path);
     const command = `${packageManager} run build`;
-    console.log(`[${modName}]\tRunning ${command}...`);
+    log(`[${modName}]\tRunning ${command}...`, { level: "DEBUG" });
 
-    console.log(`[${modName}]\tBuilding mod...`);
+    log(`[${modName}]\tBuilding mod...`, { level: "DEBUG" });
     const { stdout, stderr } = await exec(command);
 
     // Handle the output of the command
     // watchout: rollup outputs to stderr
-    if (stdout.trim()) console.log(stdout.replace(/\n/g, `\n[${modName}]\t`));
-    if (stderr.trim()) console.error(stderr.replace(/\n/g, `\n[${modName}]\t`));
+    if (stdout.trim())
+      log(stdout.replace(/\n/g, `\n[${modName}]\t`), { level: "DEBUG" });
+    if (stderr.trim())
+      log(stderr.replace(/\n/g, `\n[${modName}]\t`), { level: "DEBUG" });
 
     return true;
   } catch (error) {
-    console.error("Error occurred during the build process:", error);
+    log("Error occurred during the build process: " + error.message, {
+      level: "FAIL",
+    });
   } finally {
     // Change directory back to the root directory
     process.chdir(baseDir);

@@ -16,7 +16,7 @@ async function bootstrap(players: Player[]): Promise<BootstrapApp> {
 
   const plugins = await Promise.all([
     await ascii.default(),
-    await modloader.default() as unknown as Promise<Mod[]>,
+    (await modloader.default()) as unknown as Promise<Mod[]>,
     server.default(players, world),
     saver.default(players, world),
     datastore.default() as Promise<Configuration>,

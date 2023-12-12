@@ -7,11 +7,10 @@ import { Server } from "socket.io";
 import { portInUse } from "@etabli/utils/server/portInUse";
 import { World } from "@etabli/classes/world/World";
 
-const clog = console.log;
 
 async function server(players: Player[], world: World): Promise<Server> {
   if (serverConfig.enabled) {
-    clog(chalk.green.underline.bold("Server") + ":\t\tenabled");
+    log(chalk.green.underline.bold("Server") + ":\t\tenabled", { level: "DEBUG" });
 
     try {
       const httpServer = (await import("http")).createServer();
@@ -28,7 +27,7 @@ async function server(players: Player[], world: World): Promise<Server> {
       }
 
       io.listen(serverConfig.port);
-      clog("\tListening on port: " + serverConfig.port);
+      log("\tListening on port: " + serverConfig.port, { level: "DEBUG" });
       io.on("connection", (client) => {
         client.emit("world_loading", world.toCompressed());
 
@@ -176,7 +175,7 @@ async function server(players: Player[], world: World): Promise<Server> {
 
       return Promise.reject(e);
     }
-  } else clog(chalk.red.underline.bold("Server") + ":\t\tdisabled");
+  } else log(chalk.red.underline.bold("Server") + ":\t\tdisabled", { level: "DEBUG" });
 
   return Promise.resolve(null);
 }

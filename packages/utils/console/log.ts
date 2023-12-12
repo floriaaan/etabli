@@ -46,18 +46,27 @@ export const log = (
     type?: "default" | "chat" | "connections" | "crash";
   }
 ): void => {
-  const dateStr = `[${new Date().toLocaleString()}] `;
+  if (data === undefined) return console.log(chalk.red("undefined"));
+  const dateStr = `[${new Date().toISOString()}] `;
   const levelStr = `[${level}]`;
 
   if (server.log.enabled) {
-    const log = `${dateStr} ${levelStr}: ${data}`;
+    let log = `${dateStr} ${levelStr}: ${data}`;
     const logPath = `${server.log.pathDir}/${server.log.pathFiles[type]}`;
     if (!isDir(server.log.pathDir)) {
       mkdir(server.log.pathDir, { recursive: true }).then(() => {
         appendFile(logPath, log + "\n");
       });
     } else appendFile(logPath, log + "\n");
+
+    const globalLogPath = `${server.log.pathDir}/${
+      new Date().toISOString().split("T")[0]
+    }.log`;
+    if (level === "DEBUG") log = log.replace(/\x1b\[[0-9;]*m/g, "");
+    appendFile(globalLogPath, log + "\n");
   }
+
+  if (level === "DEBUG") return console.log(data);
 
   return console.log(
     chalk[levelColors[level] || levelColors.default].bold(levelStr) +

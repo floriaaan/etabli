@@ -42,12 +42,11 @@ export const getPlayerSave = async (playerName: string) => {
   }
 };
 
-const clog = console.log;
 async function autosaver(players: Player[], world: World) {
   // check entity saving
   try {
     if (saves.autosave.enabled) {
-      clog(chalk.green.underline.bold("Autosave") + ":\tenabled");
+      log(chalk.green.underline.bold("Autosave") + ":\tenabled", { level: "DEBUG" });
       setInterval(() => {
         if (saves.console.log.players) {
           singleLine.log(
@@ -58,7 +57,7 @@ async function autosaver(players: Player[], world: World) {
           savePlayer(player);
         }
       }, parseDuration(saves.autosave.interval));
-    } else clog(chalk.red.underline.bold("Autosave") + ":\tdisabled");
+    } else log(chalk.red.underline.bold("Autosave") + ":\tdisabled", { level: "DEBUG" });
   } catch (e) {
     log(
       e instanceof Error
