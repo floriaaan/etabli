@@ -10,7 +10,7 @@
   "child_process": false,
   "dependencies": {
     "preact": "^10.9.0",
-    "socket.io-client": "^4.5.1"
+    "socket.io-client": "^4.7.5"
   },
   "devDependencies": {
     "@preact/preset-vite": "^2.3.0",
